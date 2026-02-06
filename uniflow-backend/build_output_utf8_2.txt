@@ -1,0 +1,38 @@
+﻿
+> server-nest@0.0.1 build
+> nest build
+
+[1m[31mERROR[39m[22m in [1m./src/seed.ts:15:21[39m[22m
+TS2345: Argument of type 'MySqlTableWithColumns<{ name: "users"; schema: undefined; columns: { id: MySqlColumn<{ name: "id"; tableName: "users"; dataType: "string"; columnType: "MySqlVarChar"; data: string; driverParam: string | number; notNull: true; ... 7 more ...; generated: undefined; }, {}, {}>; email: MySqlColumn<...>; password: MySqlC...' is not assignable to parameter of type 'MySqlTable<TableConfig>'.
+  Property '$columns' is protected but type 'MySqlTable<T>' is not a class derived from 'MySqlTable<T>'.
+  [0m [90m 13 |[39m
+   [90m 14 |[39m     [36mconst[39m hashedPassword [33m=[39m [36mawait[39m bcrypt[33m.[39mhash([32m'admin123'[39m[33m,[39m [35m10[39m)[33m;[39m
+  [31m[1m>[22m[39m[90m 15 |[39m     [36mawait[39m db[33m.[39minsert(schema[33m.[39musers)[33m.[39mvalues({
+   [90m    |[39m                     [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+   [90m 16 |[39m         id[33m:[39m [32m'admin-1'[39m[33m,[39m
+   [90m 17 |[39m         email[33m:[39m [32m'admin@uniflow.com'[39m[33m,[39m
+   [90m 18 |[39m         password[33m:[39m hashedPassword[33m,[39m[0m
+
+[1m[31mERROR[39m[22m in [1m./src/seed.ts:23:21[39m[22m
+TS2345: Argument of type 'MySqlTableWithColumns<{ name: "users"; schema: undefined; columns: { id: MySqlColumn<{ name: "id"; tableName: "users"; dataType: "string"; columnType: "MySqlVarChar"; data: string; driverParam: string | number; notNull: true; ... 7 more ...; generated: undefined; }, {}, {}>; email: MySqlColumn<...>; password: MySqlC...' is not assignable to parameter of type 'MySqlTable<TableConfig>'.
+  Property '$columns' is protected but type 'MySqlTable<T>' is not a class derived from 'MySqlTable<T>'.
+  [0m [90m 21 |[39m
+   [90m 22 |[39m     [36mconst[39m studentHashedPassword [33m=[39m [36mawait[39m bcrypt[33m.[39mhash([32m'student1337'[39m[33m,[39m [35m10[39m)[33m;[39m
+  [31m[1m>[22m[39m[90m 23 |[39m     [36mawait[39m db[33m.[39minsert(schema[33m.[39musers)[33m.[39mvalues({
+   [90m    |[39m                     [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+   [90m 24 |[39m         id[33m:[39m [32m'student-user-1'[39m[33m,[39m
+   [90m 25 |[39m         email[33m:[39m [32m'etudiant@uniflow.com'[39m[33m,[39m
+   [90m 26 |[39m         password[33m:[39m studentHashedPassword[33m,[39m[0m
+
+[1m[31mERROR[39m[22m in [1m./src/seed.ts:30:21[39m[22m
+TS2345: Argument of type 'MySqlTableWithColumns<{ name: "students"; schema: undefined; columns: { id: MySqlColumn<{ name: "id"; tableName: "students"; dataType: "string"; columnType: "MySqlVarChar"; data: string; driverParam: string | number; notNull: true; ... 7 more ...; generated: undefined; }, {}, {}>; ... 9 more ...; enrollmentDate: MyS...' is not assignable to parameter of type 'MySqlTable<TableConfig>'.
+  Property '$columns' is protected but type 'MySqlTable<T>' is not a class derived from 'MySqlTable<T>'.
+  [0m [90m 28 |[39m     })[33m.[39monDuplicateKeyUpdate({ [36mset[39m[33m:[39m { email[33m:[39m [32m'etudiant@uniflow.com'[39m } })[33m;[39m
+   [90m 29 |[39m
+  [31m[1m>[22m[39m[90m 30 |[39m     [36mawait[39m db[33m.[39minsert(schema[33m.[39mstudents)[33m.[39mvalues({
+   [90m    |[39m                     [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+   [90m 31 |[39m         id[33m:[39m [32m'student-1'[39m[33m,[39m
+   [90m 32 |[39m         userId[33m:[39m [32m'student-user-1'[39m[33m,[39m
+   [90m 33 |[39m         name[33m:[39m [32m'Jean Dupont'[39m[33m,[39m[0m
+
+webpack 5.104.1 compiled with [1m[31m3 errors[39m[22m in 16951 ms

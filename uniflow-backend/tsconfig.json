@@ -1,0 +1,58 @@
+{
+  "compilerOptions": {
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "resolvePackageJsonExports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2023",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "paths": {
+      "drizzle-orm": [
+        "node_modules/drizzle-orm"
+      ],
+      "drizzle-orm/*": [
+        "node_modules/drizzle-orm/*"
+      ],
+      "pg": [
+        "node_modules/pg"
+      ],
+      "pg/*": [
+        "node_modules/pg/*"
+      ],
+      "express": [
+        "node_modules/express"
+      ],
+      "express/*": [
+        "node_modules/express/*"
+      ],
+      "drizzle-zod": [
+        "node_modules/drizzle-zod"
+      ],
+      "zod": [
+        "node_modules/zod"
+      ],
+      "@shared/*": [
+        "../shared/*"
+      ]
+    },
+    "noFallthroughCasesInSwitch": false
+  },
+  "include": [
+    "src/**/*",
+    "../shared/**/*"
+  ]
+}
