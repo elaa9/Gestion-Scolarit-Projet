@@ -1,0 +1,25 @@
+# compiled output
+/dist
+/node_modules
+
+# logs
+yarn-error.log
+npm-debug.log*
+
+# environment variables
+.env
+.env.production
+.env.development
+
+# jetbrains IDE modules
+.idea/
+*.iml
+
+# vscode
+.vscode/
+
+# macOS
+.DS_Store
+
+# tests
+/coverage
