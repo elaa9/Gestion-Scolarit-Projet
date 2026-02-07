@@ -10,7 +10,7 @@
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.insertModuleDepartmentSchema = exports.insertSpecialtySchema = exports.insertDepartmentSchema = exports.insertClaimSchema = exports.insertAbsenceSchema = exports.insertPaymentSchema = exports.insertScheduleSchema = exports.insertGradeSchema = exports.insertModuleSchema = exports.insertTeacherSchema = exports.insertStudentSchema = exports.insertUserSchema = exports.specialties = exports.departments = exports.teachers = exports.claims = exports.absences = exports.payments = exports.schedule = exports.grades = exports.modulesToDepartments = exports.modules = exports.students = exports.users = void 0;
+exports.insertClassSchema = exports.insertModuleDepartmentSchema = exports.insertSpecialtySchema = exports.insertDepartmentSchema = exports.insertClaimSchema = exports.insertAbsenceSchema = exports.insertPaymentSchema = exports.insertScheduleSchema = exports.insertGradeSchema = exports.insertModuleSchema = exports.insertTeacherSchema = exports.insertStudentSchema = exports.insertUserSchema = exports.specialties = exports.departments = exports.teachers = exports.claims = exports.absences = exports.payments = exports.schedules = exports.grades = exports.modulesToDepartments = exports.modules = exports.students = exports.classes = exports.users = void 0;
 const mysql_core_1 = __webpack_require__(/*! drizzle-orm/mysql-core */ "drizzle-orm/mysql-core");
 const drizzle_zod_1 = __webpack_require__(/*! drizzle-zod */ "drizzle-zod");
 exports.users = (0, mysql_core_1.mysqlTable)("users", {
@@ -21,10 +21,17 @@ exports.users = (0, mysql_core_1.mysqlTable)("users", {
     resetPasswordToken: (0, mysql_core_1.varchar)("reset_password_token", { length: 255 }),
     resetPasswordExpires: (0, mysql_core_1.varchar)("reset_password_expires", { length: 255 }),
 });
+exports.classes = (0, mysql_core_1.mysqlTable)("classes", {
+    id: (0, mysql_core_1.varchar)("id", { length: 255 }).primaryKey(),
+    name: (0, mysql_core_1.varchar)("name", { length: 255 }).notNull(),
+    departmentId: (0, mysql_core_1.varchar)("department_id", { length: 255 }).notNull(),
+    level: (0, mysql_core_1.varchar)("level", { length: 50 }).notNull(),
+});
 exports.students = (0, mysql_core_1.mysqlTable)("students", {
     id: (0, mysql_core_1.varchar)("id", { length: 255 }).primaryKey(),
     userId: (0, mysql_core_1.varchar)("user_id", { length: 255 }).notNull(),
     name: (0, mysql_core_1.varchar)("name", { length: 255 }).notNull(),
+    classId: (0, mysql_core_1.varchar)("class_id", { length: 255 }),
     program: (0, mysql_core_1.varchar)("program", { length: 255 }).notNull(),
     level: (0, mysql_core_1.varchar)("level", { length: 255 }).notNull(),
     average: (0, mysql_core_1.varchar)("average", { length: 50 }),
@@ -54,16 +61,16 @@ exports.grades = (0, mysql_core_1.mysqlTable)("grades", {
     status: (0, mysql_core_1.varchar)("status", { length: 50 }).notNull(),
     date: (0, mysql_core_1.varchar)("date", { length: 50 }).notNull(),
 });
-exports.schedule = (0, mysql_core_1.mysqlTable)("schedule", {
+exports.schedules = (0, mysql_core_1.mysqlTable)("schedules", {
     id: (0, mysql_core_1.varchar)("id", { length: 255 }).primaryKey(),
-    studentId: (0, mysql_core_1.varchar)("student_id", { length: 255 }).notNull(),
+    classId: (0, mysql_core_1.varchar)("class_id", { length: 255 }).notNull(),
+    moduleId: (0, mysql_core_1.varchar)("module_id", { length: 255 }).notNull(),
+    teacherId: (0, mysql_core_1.varchar)("teacher_id", { length: 255 }).notNull(),
     dayOfWeek: (0, mysql_core_1.varchar)("day_of_week", { length: 50 }).notNull(),
     startTime: (0, mysql_core_1.varchar)("start_time", { length: 50 }).notNull(),
     endTime: (0, mysql_core_1.varchar)("end_time", { length: 50 }).notNull(),
-    moduleId: (0, mysql_core_1.varchar)("module_id", { length: 255 }).notNull(),
     room: (0, mysql_core_1.varchar)("room", { length: 50 }).notNull(),
-    professor: (0, mysql_core_1.varchar)("professor", { length: 255 }).notNull(),
-    type: (0, mysql_core_1.varchar)("type", { length: 255 }).notNull(),
+    type: (0, mysql_core_1.varchar)("type", { length: 50 }).notNull(),
 });
 exports.payments = (0, mysql_core_1.mysqlTable)("payments", {
     id: (0, mysql_core_1.varchar)("id", { length: 255 }).primaryKey(),
@@ -99,6 +106,7 @@ exports.teachers = (0, mysql_core_1.mysqlTable)("teachers", {
     name: (0, mysql_core_1.varchar)("name", { length: 255 }).notNull(),
     department: (0, mysql_core_1.text)("department").notNull(),
     specialty: (0, mysql_core_1.text)("specialty").notNull(),
+    assignedClasses: (0, mysql_core_1.text)("assigned_classes"),
     email: (0, mysql_core_1.varchar)("email", { length: 255 }),
     phone: (0, mysql_core_1.varchar)("phone", { length: 50 }),
     status: (0, mysql_core_1.varchar)("status", { length: 50 }).default("Actif"),
@@ -122,13 +130,14 @@ exports.insertStudentSchema = (0, drizzle_zod_1.createInsertSchema)(exports.stud
 exports.insertTeacherSchema = (0, drizzle_zod_1.createInsertSchema)(exports.teachers);
 exports.insertModuleSchema = (0, drizzle_zod_1.createInsertSchema)(exports.modules);
 exports.insertGradeSchema = (0, drizzle_zod_1.createInsertSchema)(exports.grades);
-exports.insertScheduleSchema = (0, drizzle_zod_1.createInsertSchema)(exports.schedule);
+exports.insertScheduleSchema = (0, drizzle_zod_1.createInsertSchema)(exports.schedules);
 exports.insertPaymentSchema = (0, drizzle_zod_1.createInsertSchema)(exports.payments);
 exports.insertAbsenceSchema = (0, drizzle_zod_1.createInsertSchema)(exports.absences);
 exports.insertClaimSchema = (0, drizzle_zod_1.createInsertSchema)(exports.claims);
 exports.insertDepartmentSchema = (0, drizzle_zod_1.createInsertSchema)(exports.departments);
 exports.insertSpecialtySchema = (0, drizzle_zod_1.createInsertSchema)(exports.specialties);
 exports.insertModuleDepartmentSchema = (0, drizzle_zod_1.createInsertSchema)(exports.modulesToDepartments);
+exports.insertClassSchema = (0, drizzle_zod_1.createInsertSchema)(exports.classes);
 
 
 /***/ },
@@ -158,6 +167,8 @@ const auth_module_1 = __webpack_require__(/*! ./auth/auth.module */ "./src/auth/
 const modules_module_1 = __webpack_require__(/*! ./modules/modules.module */ "./src/modules/modules.module.ts");
 const teachers_module_1 = __webpack_require__(/*! ./teachers/teachers.module */ "./src/teachers/teachers.module.ts");
 const departments_module_1 = __webpack_require__(/*! ./departments/departments.module */ "./src/departments/departments.module.ts");
+const schedules_module_1 = __webpack_require__(/*! ./schedules/schedules.module */ "./src/schedules/schedules.module.ts");
+const classes_module_1 = __webpack_require__(/*! ./classes/classes.module */ "./src/classes/classes.module.ts");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -220,6 +231,8 @@ exports.AppModule = AppModule = __decorate([
             modules_module_1.ModulesModule,
             teachers_module_1.TeachersModule,
             departments_module_1.DepartmentsModule,
+            schedules_module_1.SchedulesModule,
+            classes_module_1.ClassesModule,
         ],
     })
 ], AppModule);
@@ -504,6 +517,245 @@ exports.AuthService = AuthService = __decorate([
     __param(0, (0, common_1.Inject)(database_provider_1.DRIZZLE)),
     __metadata("design:paramtypes", [typeof (_a = typeof mysql2_1.MySql2Database !== "undefined" && mysql2_1.MySql2Database) === "function" ? _a : Object, typeof (_b = typeof mailer_1.MailerService !== "undefined" && mailer_1.MailerService) === "function" ? _b : Object])
 ], AuthService);
+
+
+/***/ },
+
+/***/ "./src/classes/classes.controller.ts"
+/*!*******************************************!*\
+  !*** ./src/classes/classes.controller.ts ***!
+  \*******************************************/
+(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ClassesController = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const classes_service_1 = __webpack_require__(/*! ./classes.service */ "./src/classes/classes.service.ts");
+let ClassesController = class ClassesController {
+    classesService;
+    constructor(classesService) {
+        this.classesService = classesService;
+    }
+    async findAll(departmentId, level) {
+        return await this.classesService.findAll(departmentId, level);
+    }
+    async findOne(id) {
+        return await this.classesService.findOne(id);
+    }
+    async create(data) {
+        return await this.classesService.create(data);
+    }
+    async update(id, data) {
+        return await this.classesService.update(id, data);
+    }
+    async delete(id) {
+        return await this.classesService.delete(id);
+    }
+};
+exports.ClassesController = ClassesController;
+__decorate([
+    (0, common_1.Get)(),
+    __param(0, (0, common_1.Query)('departmentId')),
+    __param(1, (0, common_1.Query)('level')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", Promise)
+], ClassesController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], ClassesController.prototype, "findOne", null);
+__decorate([
+    (0, common_1.Post)(),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], ClassesController.prototype, "create", null);
+__decorate([
+    (0, common_1.Post)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", Promise)
+], ClassesController.prototype, "update", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], ClassesController.prototype, "delete", null);
+exports.ClassesController = ClassesController = __decorate([
+    (0, common_1.Controller)('api/classes'),
+    __metadata("design:paramtypes", [typeof (_a = typeof classes_service_1.ClassesService !== "undefined" && classes_service_1.ClassesService) === "function" ? _a : Object])
+], ClassesController);
+
+
+/***/ },
+
+/***/ "./src/classes/classes.module.ts"
+/*!***************************************!*\
+  !*** ./src/classes/classes.module.ts ***!
+  \***************************************/
+(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ClassesModule = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const classes_service_1 = __webpack_require__(/*! ./classes.service */ "./src/classes/classes.service.ts");
+const classes_controller_1 = __webpack_require__(/*! ./classes.controller */ "./src/classes/classes.controller.ts");
+const database_module_1 = __webpack_require__(/*! ../database/database.module */ "./src/database/database.module.ts");
+let ClassesModule = class ClassesModule {
+};
+exports.ClassesModule = ClassesModule;
+exports.ClassesModule = ClassesModule = __decorate([
+    (0, common_1.Module)({
+        imports: [database_module_1.DatabaseModule],
+        controllers: [classes_controller_1.ClassesController],
+        providers: [classes_service_1.ClassesService],
+        exports: [classes_service_1.ClassesService],
+    })
+], ClassesModule);
+
+
+/***/ },
+
+/***/ "./src/classes/classes.service.ts"
+/*!****************************************!*\
+  !*** ./src/classes/classes.service.ts ***!
+  \****************************************/
+(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ClassesService = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const database_provider_1 = __webpack_require__(/*! ../database/database.provider */ "./src/database/database.provider.ts");
+const mysql2_1 = __webpack_require__(/*! drizzle-orm/mysql2 */ "drizzle-orm/mysql2");
+const schema = __importStar(__webpack_require__(/*! @shared/schema */ "../shared/schema.ts"));
+const drizzle_orm_1 = __webpack_require__(/*! drizzle-orm */ "drizzle-orm");
+const uuid_1 = __webpack_require__(/*! uuid */ "uuid");
+let ClassesService = class ClassesService {
+    db;
+    constructor(db) {
+        this.db = db;
+    }
+    async findAll(departmentId, level) {
+        if (departmentId && level) {
+            return await this.db.query.classes.findMany({
+                where: (0, drizzle_orm_1.and)((0, drizzle_orm_1.eq)(schema.classes.departmentId, departmentId), (0, drizzle_orm_1.eq)(schema.classes.level, level))
+            });
+        }
+        if (departmentId) {
+            return await this.db.query.classes.findMany({
+                where: (0, drizzle_orm_1.eq)(schema.classes.departmentId, departmentId)
+            });
+        }
+        return await this.db.query.classes.findMany();
+    }
+    async findOne(id) {
+        return await this.db.query.classes.findFirst({
+            where: (0, drizzle_orm_1.eq)(schema.classes.id, id)
+        });
+    }
+    async create(data) {
+        const id = (0, uuid_1.v4)();
+        await this.db.insert(schema.classes).values({
+            id,
+            ...data
+        });
+        return { id, ...data };
+    }
+    async update(id, data) {
+        await this.db.update(schema.classes)
+            .set(data)
+            .where((0, drizzle_orm_1.eq)(schema.classes.id, id));
+        return { id, ...data };
+    }
+    async delete(id) {
+        await this.db.delete(schema.classes)
+            .where((0, drizzle_orm_1.eq)(schema.classes.id, id));
+        return { message: 'Class deleted' };
+    }
+};
+exports.ClassesService = ClassesService;
+exports.ClassesService = ClassesService = __decorate([
+    (0, common_1.Injectable)(),
+    __param(0, (0, common_1.Inject)(database_provider_1.DRIZZLE)),
+    __metadata("design:paramtypes", [typeof (_a = typeof mysql2_1.MySql2Database !== "undefined" && mysql2_1.MySql2Database) === "function" ? _a : Object])
+], ClassesService);
 
 
 /***/ },
@@ -1139,6 +1391,236 @@ exports.ModulesService = ModulesService = __decorate([
 
 /***/ },
 
+/***/ "./src/schedules/schedules.controller.ts"
+/*!***********************************************!*\
+  !*** ./src/schedules/schedules.controller.ts ***!
+  \***********************************************/
+(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.SchedulesController = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const schedules_service_1 = __webpack_require__(/*! ./schedules.service */ "./src/schedules/schedules.service.ts");
+let SchedulesController = class SchedulesController {
+    schedulesService;
+    constructor(schedulesService) {
+        this.schedulesService = schedulesService;
+    }
+    async findAll(classId, teacherId) {
+        if (classId) {
+            return await this.schedulesService.findByClass(classId);
+        }
+        if (teacherId) {
+            return await this.schedulesService.findByTeacher(teacherId);
+        }
+        return await this.schedulesService.findAll();
+    }
+    async create(data) {
+        return await this.schedulesService.create(data);
+    }
+    async update(id, data) {
+        return await this.schedulesService.update(id, data);
+    }
+    async delete(id) {
+        return await this.schedulesService.delete(id);
+    }
+};
+exports.SchedulesController = SchedulesController;
+__decorate([
+    (0, common_1.Get)(),
+    __param(0, (0, common_1.Query)('classId')),
+    __param(1, (0, common_1.Query)('teacherId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", Promise)
+], SchedulesController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Post)(),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], SchedulesController.prototype, "create", null);
+__decorate([
+    (0, common_1.Post)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", Promise)
+], SchedulesController.prototype, "update", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], SchedulesController.prototype, "delete", null);
+exports.SchedulesController = SchedulesController = __decorate([
+    (0, common_1.Controller)('api/schedules'),
+    __metadata("design:paramtypes", [typeof (_a = typeof schedules_service_1.SchedulesService !== "undefined" && schedules_service_1.SchedulesService) === "function" ? _a : Object])
+], SchedulesController);
+
+
+/***/ },
+
+/***/ "./src/schedules/schedules.module.ts"
+/*!*******************************************!*\
+  !*** ./src/schedules/schedules.module.ts ***!
+  \*******************************************/
+(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.SchedulesModule = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const schedules_service_1 = __webpack_require__(/*! ./schedules.service */ "./src/schedules/schedules.service.ts");
+const schedules_controller_1 = __webpack_require__(/*! ./schedules.controller */ "./src/schedules/schedules.controller.ts");
+const database_module_1 = __webpack_require__(/*! ../database/database.module */ "./src/database/database.module.ts");
+let SchedulesModule = class SchedulesModule {
+};
+exports.SchedulesModule = SchedulesModule;
+exports.SchedulesModule = SchedulesModule = __decorate([
+    (0, common_1.Module)({
+        imports: [database_module_1.DatabaseModule],
+        providers: [schedules_service_1.SchedulesService],
+        controllers: [schedules_controller_1.SchedulesController],
+        exports: [schedules_service_1.SchedulesService],
+    })
+], SchedulesModule);
+
+
+/***/ },
+
+/***/ "./src/schedules/schedules.service.ts"
+/*!********************************************!*\
+  !*** ./src/schedules/schedules.service.ts ***!
+  \********************************************/
+(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.SchedulesService = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const database_provider_1 = __webpack_require__(/*! ../database/database.provider */ "./src/database/database.provider.ts");
+const mysql2_1 = __webpack_require__(/*! drizzle-orm/mysql2 */ "drizzle-orm/mysql2");
+const schema = __importStar(__webpack_require__(/*! @shared/schema */ "../shared/schema.ts"));
+const drizzle_orm_1 = __webpack_require__(/*! drizzle-orm */ "drizzle-orm");
+const uuid_1 = __webpack_require__(/*! uuid */ "uuid");
+let SchedulesService = class SchedulesService {
+    db;
+    constructor(db) {
+        this.db = db;
+    }
+    async findAll() {
+        return await this.db.query.schedules.findMany();
+    }
+    async findByClass(classId) {
+        return await this.db.query.schedules.findMany({
+            where: (0, drizzle_orm_1.eq)(schema.schedules.classId, classId)
+        });
+    }
+    async findByTeacher(teacherId) {
+        return await this.db.query.schedules.findMany({
+            where: (0, drizzle_orm_1.eq)(schema.schedules.teacherId, teacherId)
+        });
+    }
+    async create(data) {
+        const id = (0, uuid_1.v4)();
+        await this.db.insert(schema.schedules).values({
+            id,
+            ...data
+        });
+        return { id, ...data };
+    }
+    async update(id, data) {
+        await this.db.update(schema.schedules)
+            .set(data)
+            .where((0, drizzle_orm_1.eq)(schema.schedules.id, id));
+        return { id, ...data };
+    }
+    async delete(id) {
+        await this.db.delete(schema.schedules)
+            .where((0, drizzle_orm_1.eq)(schema.schedules.id, id));
+        return { message: 'Schedule item deleted' };
+    }
+};
+exports.SchedulesService = SchedulesService;
+exports.SchedulesService = SchedulesService = __decorate([
+    (0, common_1.Injectable)(),
+    __param(0, (0, common_1.Inject)(database_provider_1.DRIZZLE)),
+    __metadata("design:paramtypes", [typeof (_a = typeof mysql2_1.MySql2Database !== "undefined" && mysql2_1.MySql2Database) === "function" ? _a : Object])
+], SchedulesService);
+
+
+/***/ },
+
 /***/ "./src/students/students.controller.ts"
 /*!*********************************************!*\
   !*** ./src/students/students.controller.ts ***!
@@ -1239,21 +1721,6 @@ let StudentsController = class StudentsController {
         if (!grade)
             throw new common_1.NotFoundException('Grade not found');
         return grade;
-    }
-    async addSchedule(id, body) {
-        return await this.studentsService.addScheduleItem(id, body);
-    }
-    async updateSchedule(scheduleId, body) {
-        return await this.studentsService.updateScheduleItem(scheduleId, body);
-    }
-    async deleteSchedule(scheduleId) {
-        return await this.studentsService.deleteScheduleItem(scheduleId);
-    }
-    async getScheduleItem(scheduleId) {
-        const item = await this.studentsService.getScheduleItemById(scheduleId);
-        if (!item)
-            throw new common_1.NotFoundException('Schedule item not found');
-        return item;
     }
     async addPayment(id, body) {
         return await this.studentsService.addPayment(id, body);
@@ -1449,36 +1916,6 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], StudentsController.prototype, "getGrade", null);
-__decorate([
-    (0, common_1.Post)('admin/students/:id/schedule'),
-    __param(0, (0, common_1.Param)('id')),
-    __param(1, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
-    __metadata("design:returntype", Promise)
-], StudentsController.prototype, "addSchedule", null);
-__decorate([
-    (0, common_1.Put)('admin/schedule/:scheduleId'),
-    __param(0, (0, common_1.Param)('scheduleId')),
-    __param(1, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
-    __metadata("design:returntype", Promise)
-], StudentsController.prototype, "updateSchedule", null);
-__decorate([
-    (0, common_1.Delete)('admin/schedule/:scheduleId'),
-    __param(0, (0, common_1.Param)('scheduleId')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Promise)
-], StudentsController.prototype, "deleteSchedule", null);
-__decorate([
-    (0, common_1.Get)('admin/schedule/:scheduleId'),
-    __param(0, (0, common_1.Param)('scheduleId')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Promise)
-], StudentsController.prototype, "getScheduleItem", null);
 __decorate([
     (0, common_1.Post)('admin/students/:id/payments'),
     __param(0, (0, common_1.Param)('id')),
@@ -1678,8 +2115,11 @@ let StudentsService = class StudentsService {
         });
     }
     async getSchedule(studentId) {
-        return await this.db.query.schedule.findMany({
-            where: (0, drizzle_orm_1.eq)(schema.schedule.studentId, studentId),
+        const student = await this.getStudentById(studentId);
+        if (!student || !student.classId)
+            return [];
+        return await this.db.query.schedules.findMany({
+            where: (0, drizzle_orm_1.eq)(schema.schedules.classId, student.classId)
         });
     }
     async getPayments(studentId) {
@@ -1752,6 +2192,7 @@ let StudentsService = class StudentsService {
             name: name,
             program: program || 'N/A',
             level: level || 'N/A',
+            classId: data.classId || null,
             email: email,
             phone: phone || null,
             address: address || null,
@@ -1783,31 +2224,6 @@ let StudentsService = class StudentsService {
         await this.db.delete(schema.grades)
             .where((0, drizzle_orm_1.eq)(schema.grades.id, id));
         return { message: 'Grade deleted successfully' };
-    }
-    async addScheduleItem(studentId, data) {
-        const id = (0, uuid_1.v4)();
-        await this.db.insert(schema.schedule).values({
-            id,
-            studentId,
-            ...data,
-        });
-        return { message: 'Schedule item added successfully', id };
-    }
-    async updateScheduleItem(id, updates) {
-        await this.db.update(schema.schedule)
-            .set(updates)
-            .where((0, drizzle_orm_1.eq)(schema.schedule.id, id));
-        return { message: 'Schedule item updated successfully' };
-    }
-    async getScheduleItemById(id) {
-        return await this.db.query.schedule.findFirst({
-            where: (0, drizzle_orm_1.eq)(schema.schedule.id, id),
-        });
-    }
-    async deleteScheduleItem(id) {
-        await this.db.delete(schema.schedule)
-            .where((0, drizzle_orm_1.eq)(schema.schedule.id, id));
-        return { message: 'Schedule item deleted successfully' };
     }
     async addPayment(studentId, data) {
         const id = (0, uuid_1.v4)();
@@ -2131,6 +2547,7 @@ let TeachersService = class TeachersService {
             name,
             department: department || 'N/A',
             specialty: specialty || 'N/A',
+            assignedClasses: data.assignedClasses || null,
             email,
             phone: phone || null,
             status: 'Actif',

@@ -99,6 +99,46 @@ async function bootstrap() {
             console.log('Seeded departments and specialties.');
         }
 
+        await db.execute(sql`DROP TABLE IF EXISTS schedules`);
+
+        await db.execute(sql`
+            CREATE TABLE IF NOT EXISTS classes (
+                id VARCHAR(255) PRIMARY KEY,
+                name VARCHAR(255) NOT NULL,
+                department_id VARCHAR(255) NOT NULL,
+                level VARCHAR(50) NOT NULL
+            )
+        `);
+
+        await db.execute(sql`
+            CREATE TABLE IF NOT EXISTS schedules (
+                id VARCHAR(255) PRIMARY KEY,
+                class_id VARCHAR(255) NOT NULL,
+                module_id VARCHAR(255) NOT NULL,
+                teacher_id VARCHAR(255) NOT NULL,
+                day_of_week VARCHAR(50) NOT NULL,
+                start_time VARCHAR(50) NOT NULL,
+                end_time VARCHAR(50) NOT NULL,
+                room VARCHAR(50) NOT NULL,
+                type VARCHAR(50) NOT NULL
+            )
+        `);
+
+        // Add class_id to students if not exists
+        try {
+            await db.execute(sql`ALTER TABLE students ADD COLUMN class_id VARCHAR(255)`);
+            console.log('Added class_id column to students.');
+        } catch (e) {
+            // Probably already exists
+        }
+
+        try {
+            await db.execute(sql`DROP TABLE IF EXISTS schedule`);
+        } catch (e) { }
+
+        await db.execute(sql`ALTER TABLE teachers ADD COLUMN IF NOT EXISTS assigned_classes TEXT`);
+        console.log('Migration complete: Classes and updated students/teachers tables are ready.');
+
     } catch (error: any) {
         console.error('Migration failed:', error);
     } finally {

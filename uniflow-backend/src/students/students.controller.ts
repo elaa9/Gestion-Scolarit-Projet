@@ -119,28 +119,7 @@ export class StudentsController {
         return grade;
     }
 
-    // --- SCHEDULE CRUD ---
-    @Post('admin/students/:id/schedule')
-    async addSchedule(@Param('id') id: string, @Body() body: any) {
-        return await this.studentsService.addScheduleItem(id, body);
-    }
-
-    @Put('admin/schedule/:scheduleId')
-    async updateSchedule(@Param('scheduleId') scheduleId: string, @Body() body: any) {
-        return await this.studentsService.updateScheduleItem(scheduleId, body);
-    }
-
-    @Delete('admin/schedule/:scheduleId')
-    async deleteSchedule(@Param('scheduleId') scheduleId: string) {
-        return await this.studentsService.deleteScheduleItem(scheduleId);
-    }
-
-    @Get('admin/schedule/:scheduleId')
-    async getScheduleItem(@Param('scheduleId') scheduleId: string) {
-        const item = await this.studentsService.getScheduleItemById(scheduleId);
-        if (!item) throw new NotFoundException('Schedule item not found');
-        return item;
-    }
+    // --- SCHEDULE (MOVED TO SCHEDULES CONTROLLER) ---
 
     // --- PAYMENTS CRUD ---
     @Post('admin/students/:id/payments')

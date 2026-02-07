@@ -56,6 +56,7 @@ export class TeachersService {
             name,
             department: department || 'N/A',
             specialty: specialty || 'N/A',
+            assignedClasses: data.assignedClasses || null, // Added assignedClasses
             email,
             phone: phone || null,
             status: 'Actif',

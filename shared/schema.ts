@@ -12,10 +12,18 @@ export const users = mysqlTable("users", {
   resetPasswordExpires: varchar("reset_password_expires", { length: 255 }),
 });
 
+export const classes = mysqlTable("classes", {
+  id: varchar("id", { length: 255 }).primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(), // e.g. "GI-1-A"
+  departmentId: varchar("department_id", { length: 255 }).notNull(),
+  level: varchar("level", { length: 50 }).notNull(),
+});
+
 export const students = mysqlTable("students", {
   id: varchar("id", { length: 255 }).primaryKey(),
   userId: varchar("user_id", { length: 255 }).notNull(),
   name: varchar("name", { length: 255 }).notNull(),
+  classId: varchar("class_id", { length: 255 }), // New link to classes
   program: varchar("program", { length: 255 }).notNull(),
   level: varchar("level", { length: 255 }).notNull(),
   average: varchar("average", { length: 50 }),
@@ -49,16 +57,16 @@ export const grades = mysqlTable("grades", {
   date: varchar("date", { length: 50 }).notNull(),
 });
 
-export const schedule = mysqlTable("schedule", {
+export const schedules = mysqlTable("schedules", {
   id: varchar("id", { length: 255 }).primaryKey(),
-  studentId: varchar("student_id", { length: 255 }).notNull(),
+  classId: varchar("class_id", { length: 255 }).notNull(), // Now linked to class
+  moduleId: varchar("module_id", { length: 255 }).notNull(),
+  teacherId: varchar("teacher_id", { length: 255 }).notNull(),
   dayOfWeek: varchar("day_of_week", { length: 50 }).notNull(),
   startTime: varchar("start_time", { length: 50 }).notNull(),
   endTime: varchar("end_time", { length: 50 }).notNull(),
-  moduleId: varchar("module_id", { length: 255 }).notNull(),
   room: varchar("room", { length: 50 }).notNull(),
-  professor: varchar("professor", { length: 255 }).notNull(),
-  type: varchar("type", { length: 255 }).notNull(),
+  type: varchar("type", { length: 50 }).notNull(),
 });
 
 export const payments = mysqlTable("payments", {
@@ -98,6 +106,7 @@ export const teachers = mysqlTable("teachers", {
   name: varchar("name", { length: 255 }).notNull(),
   department: text("department").notNull(),
   specialty: text("specialty").notNull(),
+  assignedClasses: text("assigned_classes"), // Linked classes
   email: varchar("email", { length: 255 }),
   phone: varchar("phone", { length: 50 }),
   status: varchar("status", { length: 50 }).default("Actif"),
@@ -125,13 +134,14 @@ export const insertStudentSchema = createInsertSchema(students);
 export const insertTeacherSchema = createInsertSchema(teachers);
 export const insertModuleSchema = createInsertSchema(modules);
 export const insertGradeSchema = createInsertSchema(grades);
-export const insertScheduleSchema = createInsertSchema(schedule);
+export const insertScheduleSchema = createInsertSchema(schedules);
 export const insertPaymentSchema = createInsertSchema(payments);
 export const insertAbsenceSchema = createInsertSchema(absences);
 export const insertClaimSchema = createInsertSchema(claims);
 export const insertDepartmentSchema = createInsertSchema(departments);
 export const insertSpecialtySchema = createInsertSchema(specialties);
 export const insertModuleDepartmentSchema = createInsertSchema(modulesToDepartments);
+export const insertClassSchema = createInsertSchema(classes);
 
 export type User = typeof users.$inferSelect;
 export type InsertUser = z.infer<typeof insertUserSchema>;
@@ -139,9 +149,10 @@ export type Student = typeof students.$inferSelect;
 export type Teacher = typeof teachers.$inferSelect;
 export type Module = typeof modules.$inferSelect;
 export type Grade = typeof grades.$inferSelect;
-export type ScheduleItem = typeof schedule.$inferSelect;
+export type ScheduleItem = typeof schedules.$inferSelect;
 export type Payment = typeof payments.$inferSelect;
 export type Absence = typeof absences.$inferSelect;
 export type Claim = typeof claims.$inferSelect;
 export type Department = typeof departments.$inferSelect;
 export type Specialty = typeof specialties.$inferSelect;
+export type Class = typeof classes.$inferSelect;

@@ -2,7 +2,7 @@ import { Injectable, Inject, BadRequestException } from '@nestjs/common';
 import { DRIZZLE } from '../database/database.provider';
 import { MySql2Database } from 'drizzle-orm/mysql2';
 import * as schema from '@shared/schema';
-import { eq } from 'drizzle-orm';
+import { eq, and } from 'drizzle-orm';
 import { v4 as uuidv4 } from 'uuid';
 import * as bcrypt from 'bcrypt';
 
@@ -25,8 +25,11 @@ export class StudentsService {
     }
 
     async getSchedule(studentId: string) {
-        return await (this.db.query as any).schedule.findMany({
-            where: eq(schema.schedule.studentId as any, studentId),
+        const student = await this.getStudentById(studentId);
+        if (!student || !student.classId) return [];
+
+        return await (this.db.query as any).schedules.findMany({
+            where: eq(schema.schedules.classId as any, student.classId)
         });
     }
 
@@ -119,6 +122,7 @@ export class StudentsService {
             name: name,
             program: program || 'N/A',
             level: level || 'N/A',
+            classId: data.classId || null, // Added classId
             email: email,
             phone: phone || null,
             address: address || null,
@@ -158,35 +162,7 @@ export class StudentsService {
         return { message: 'Grade deleted successfully' };
     }
 
-    // --- SCHEDULE ---
-    async addScheduleItem(studentId: string, data: Omit<schema.ScheduleItem, 'id' | 'studentId'>) {
-        const id = uuidv4();
-        await (this.db.insert(schema.schedule as any) as any).values({
-            id,
-            studentId,
-            ...data,
-        });
-        return { message: 'Schedule item added successfully', id };
-    }
-
-    async updateScheduleItem(id: string, updates: Partial<schema.ScheduleItem>) {
-        await this.db.update(schema.schedule as any)
-            .set(updates)
-            .where(eq(schema.schedule.id as any, id));
-        return { message: 'Schedule item updated successfully' };
-    }
-
-    async getScheduleItemById(id: string) {
-        return await (this.db.query as any).schedule.findFirst({
-            where: eq(schema.schedule.id as any, id),
-        });
-    }
-
-    async deleteScheduleItem(id: string) {
-        await this.db.delete(schema.schedule as any)
-            .where(eq(schema.schedule.id as any, id));
-        return { message: 'Schedule item deleted successfully' };
-    }
+    // --- SCHEDULE (OLD METHODS REMOVED) ---
 
     // --- PAYMENTS ---
     async addPayment(studentId: string, data: Omit<schema.Payment, 'id' | 'studentId'>) {
