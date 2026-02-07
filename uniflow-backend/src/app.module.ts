@@ -7,6 +7,8 @@ import { DatabaseModule } from './database/database.module';
 import { StudentsModule } from './students/students.module';
 import { AuthModule } from './auth/auth.module';
 import { ModulesModule } from './modules/modules.module';
+import { TeachersModule } from './teachers/teachers.module';
+import { DepartmentsModule } from './departments/departments.module';
 
 @Module({
   imports: [
@@ -66,6 +68,8 @@ import { ModulesModule } from './modules/modules.module';
     StudentsModule,
     AuthModule,
     ModulesModule,
+    TeachersModule,
+    DepartmentsModule,
   ],
 })
 export class AppModule { }

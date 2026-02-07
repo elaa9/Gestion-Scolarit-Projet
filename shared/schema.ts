@@ -34,6 +34,11 @@ export const modules = mysqlTable("modules", {
   semester: varchar("semester", { length: 50 }).default("S1"),
 });
 
+export const modulesToDepartments = mysqlTable("modules_to_departments", {
+  moduleId: varchar("module_id", { length: 255 }).notNull(),
+  departmentId: varchar("department_id", { length: 255 }).notNull(),
+});
+
 export const grades = mysqlTable("grades", {
   id: varchar("id", { length: 255 }).primaryKey(),
   studentId: varchar("student_id", { length: 255 }).notNull(),
@@ -87,6 +92,29 @@ export const claims = mysqlTable("claims", {
   response: text("response"),
 });
 
+export const teachers = mysqlTable("teachers", {
+  id: varchar("id", { length: 255 }).primaryKey(),
+  userId: varchar("user_id", { length: 255 }).notNull(),
+  name: varchar("name", { length: 255 }).notNull(),
+  department: text("department").notNull(),
+  specialty: text("specialty").notNull(),
+  email: varchar("email", { length: 255 }),
+  phone: varchar("phone", { length: 50 }),
+  status: varchar("status", { length: 50 }).default("Actif"),
+});
+
+export const departments = mysqlTable("departments", {
+  id: varchar("id", { length: 255 }).primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  code: varchar("code", { length: 50 }).notNull(),
+});
+
+export const specialties = mysqlTable("specialties", {
+  id: varchar("id", { length: 255 }).primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  departmentId: varchar("department_id", { length: 255 }).notNull(),
+});
+
 export const insertUserSchema = createInsertSchema(users).pick({
   email: true,
   password: true,
@@ -94,19 +122,26 @@ export const insertUserSchema = createInsertSchema(users).pick({
 });
 
 export const insertStudentSchema = createInsertSchema(students);
+export const insertTeacherSchema = createInsertSchema(teachers);
 export const insertModuleSchema = createInsertSchema(modules);
 export const insertGradeSchema = createInsertSchema(grades);
 export const insertScheduleSchema = createInsertSchema(schedule);
 export const insertPaymentSchema = createInsertSchema(payments);
 export const insertAbsenceSchema = createInsertSchema(absences);
 export const insertClaimSchema = createInsertSchema(claims);
+export const insertDepartmentSchema = createInsertSchema(departments);
+export const insertSpecialtySchema = createInsertSchema(specialties);
+export const insertModuleDepartmentSchema = createInsertSchema(modulesToDepartments);
 
 export type User = typeof users.$inferSelect;
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type Student = typeof students.$inferSelect;
+export type Teacher = typeof teachers.$inferSelect;
 export type Module = typeof modules.$inferSelect;
 export type Grade = typeof grades.$inferSelect;
 export type ScheduleItem = typeof schedule.$inferSelect;
 export type Payment = typeof payments.$inferSelect;
 export type Absence = typeof absences.$inferSelect;
 export type Claim = typeof claims.$inferSelect;
+export type Department = typeof departments.$inferSelect;
+export type Specialty = typeof specialties.$inferSelect;
