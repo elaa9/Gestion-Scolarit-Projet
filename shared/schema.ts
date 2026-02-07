@@ -8,6 +8,8 @@ export const users = mysqlTable("users", {
   email: varchar("email", { length: 255 }).notNull().unique(),
   password: text("password").notNull(),
   role: varchar("role", { length: 50 }).notNull(),
+  resetPasswordToken: varchar("reset_password_token", { length: 255 }),
+  resetPasswordExpires: varchar("reset_password_expires", { length: 255 }),
 });
 
 export const students = mysqlTable("students", {

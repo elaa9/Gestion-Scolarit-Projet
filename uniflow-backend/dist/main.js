@@ -1,246 +1,25 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
-/******/ 	var __webpack_modules__ = ([
-/* 0 */,
-/* 1 */
-/***/ ((module) => {
+/******/ 	var __webpack_modules__ = ({
 
-module.exports = require("@nestjs/core");
-
-/***/ }),
-/* 2 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.AppModule = void 0;
-const common_1 = __webpack_require__(3);
-const config_1 = __webpack_require__(4);
-const app_controller_1 = __webpack_require__(5);
-const app_service_1 = __webpack_require__(6);
-const database_module_1 = __webpack_require__(7);
-const students_module_1 = __webpack_require__(14);
-const auth_module_1 = __webpack_require__(18);
-const modules_module_1 = __webpack_require__(22);
-let AppModule = class AppModule {
-};
-exports.AppModule = AppModule;
-exports.AppModule = AppModule = __decorate([
-    (0, common_1.Module)({
-        imports: [
-            config_1.ConfigModule.forRoot({
-                isGlobal: true,
-                envFilePath: ['.env', 'server-nest/.env']
-            }),
-            database_module_1.DatabaseModule,
-            students_module_1.StudentsModule,
-            auth_module_1.AuthModule,
-            modules_module_1.ModulesModule,
-        ],
-        controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
-    })
-], AppModule);
-
-
-/***/ }),
-/* 3 */
-/***/ ((module) => {
-
-module.exports = require("@nestjs/common");
-
-/***/ }),
-/* 4 */
-/***/ ((module) => {
-
-module.exports = require("@nestjs/config");
-
-/***/ }),
-/* 5 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var _a;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.AppController = void 0;
-const common_1 = __webpack_require__(3);
-const app_service_1 = __webpack_require__(6);
-let AppController = class AppController {
-    appService;
-    constructor(appService) {
-        this.appService = appService;
-    }
-    getHello() {
-        return this.appService.getHello();
-    }
-};
-exports.AppController = AppController;
-__decorate([
-    (0, common_1.Get)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", String)
-], AppController.prototype, "getHello", null);
-exports.AppController = AppController = __decorate([
-    (0, common_1.Controller)(),
-    __metadata("design:paramtypes", [typeof (_a = typeof app_service_1.AppService !== "undefined" && app_service_1.AppService) === "function" ? _a : Object])
-], AppController);
-
-
-/***/ }),
-/* 6 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.AppService = void 0;
-const common_1 = __webpack_require__(3);
-let AppService = class AppService {
-    getHello() {
-        return 'Hello World!';
-    }
-};
-exports.AppService = AppService;
-exports.AppService = AppService = __decorate([
-    (0, common_1.Injectable)()
-], AppService);
-
-
-/***/ }),
-/* 7 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DatabaseModule = void 0;
-const common_1 = __webpack_require__(3);
-const database_provider_1 = __webpack_require__(8);
-let DatabaseModule = class DatabaseModule {
-};
-exports.DatabaseModule = DatabaseModule;
-exports.DatabaseModule = DatabaseModule = __decorate([
-    (0, common_1.Global)(),
-    (0, common_1.Module)({
-        providers: [database_provider_1.DrizzleProvider],
-        exports: [database_provider_1.DRIZZLE],
-    })
-], DatabaseModule);
-
-
-/***/ }),
-/* 8 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || (function () {
-    var ownKeys = function(o) {
-        ownKeys = Object.getOwnPropertyNames || function (o) {
-            var ar = [];
-            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
-            return ar;
-        };
-        return ownKeys(o);
-    };
-    return function (mod) {
-        if (mod && mod.__esModule) return mod;
-        var result = {};
-        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
-        __setModuleDefault(result, mod);
-        return result;
-    };
-})();
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DrizzleProvider = exports.DRIZZLE = void 0;
-const config_1 = __webpack_require__(4);
-const mysql2_1 = __webpack_require__(9);
-const mysql = __importStar(__webpack_require__(10));
-const schema = __importStar(__webpack_require__(11));
-exports.DRIZZLE = 'DRIZZLE';
-exports.DrizzleProvider = {
-    provide: exports.DRIZZLE,
-    useFactory: async (configService) => {
-        const databaseUrl = configService.get('DATABASE_URL');
-        if (!databaseUrl) {
-            throw new Error('DATABASE_URL is not defined in the environment. Please check your .env file.');
-        }
-        const pool = await mysql.createPool({
-            uri: databaseUrl,
-        });
-        return (0, mysql2_1.drizzle)(pool, { schema, mode: 'default' });
-    },
-    inject: [config_1.ConfigService],
-};
-
-
-/***/ }),
-/* 9 */
-/***/ ((module) => {
-
-module.exports = require("drizzle-orm/mysql2");
-
-/***/ }),
-/* 10 */
-/***/ ((module) => {
-
-module.exports = require("mysql2/promise");
-
-/***/ }),
-/* 11 */
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ "../shared/schema.ts"
+/*!***************************!*\
+  !*** ../shared/schema.ts ***!
+  \***************************/
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.insertClaimSchema = exports.insertAbsenceSchema = exports.insertPaymentSchema = exports.insertScheduleSchema = exports.insertGradeSchema = exports.insertModuleSchema = exports.insertStudentSchema = exports.insertUserSchema = exports.claims = exports.absences = exports.payments = exports.schedule = exports.grades = exports.modules = exports.students = exports.users = void 0;
-const mysql_core_1 = __webpack_require__(12);
-const drizzle_zod_1 = __webpack_require__(13);
+const mysql_core_1 = __webpack_require__(/*! drizzle-orm/mysql-core */ "drizzle-orm/mysql-core");
+const drizzle_zod_1 = __webpack_require__(/*! drizzle-zod */ "drizzle-zod");
 exports.users = (0, mysql_core_1.mysqlTable)("users", {
     id: (0, mysql_core_1.varchar)("id", { length: 255 }).primaryKey(),
     email: (0, mysql_core_1.varchar)("email", { length: 255 }).notNull().unique(),
     password: (0, mysql_core_1.text)("password").notNull(),
     role: (0, mysql_core_1.varchar)("role", { length: 50 }).notNull(),
+    resetPasswordToken: (0, mysql_core_1.varchar)("reset_password_token", { length: 255 }),
+    resetPasswordExpires: (0, mysql_core_1.varchar)("reset_password_expires", { length: 255 }),
 });
 exports.students = (0, mysql_core_1.mysqlTable)("students", {
     id: (0, mysql_core_1.varchar)("id", { length: 255 }).primaryKey(),
@@ -324,21 +103,13 @@ exports.insertAbsenceSchema = (0, drizzle_zod_1.createInsertSchema)(exports.abse
 exports.insertClaimSchema = (0, drizzle_zod_1.createInsertSchema)(exports.claims);
 
 
-/***/ }),
-/* 12 */
-/***/ ((module) => {
+/***/ },
 
-module.exports = require("drizzle-orm/mysql-core");
-
-/***/ }),
-/* 13 */
-/***/ ((module) => {
-
-module.exports = require("drizzle-zod");
-
-/***/ }),
-/* 14 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ "./src/app.module.ts"
+/*!***************************!*\
+  !*** ./src/app.module.ts ***!
+  \***************************/
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -348,24 +119,194 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.StudentsModule = void 0;
-const common_1 = __webpack_require__(3);
-const students_service_1 = __webpack_require__(15);
-const students_controller_1 = __webpack_require__(17);
-let StudentsModule = class StudentsModule {
+exports.AppModule = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const config_1 = __webpack_require__(/*! @nestjs/config */ "@nestjs/config");
+const mailer_1 = __webpack_require__(/*! @nestjs-modules/mailer */ "@nestjs-modules/mailer");
+const handlebars_adapter_1 = __webpack_require__(/*! @nestjs-modules/mailer/dist/adapters/handlebars.adapter */ "@nestjs-modules/mailer/dist/adapters/handlebars.adapter");
+const database_module_1 = __webpack_require__(/*! ./database/database.module */ "./src/database/database.module.ts");
+const students_module_1 = __webpack_require__(/*! ./students/students.module */ "./src/students/students.module.ts");
+const auth_module_1 = __webpack_require__(/*! ./auth/auth.module */ "./src/auth/auth.module.ts");
+const modules_module_1 = __webpack_require__(/*! ./modules/modules.module */ "./src/modules/modules.module.ts");
+let AppModule = class AppModule {
 };
-exports.StudentsModule = StudentsModule;
-exports.StudentsModule = StudentsModule = __decorate([
+exports.AppModule = AppModule;
+exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        controllers: [students_controller_1.StudentsController],
-        providers: [students_service_1.StudentsService],
+        imports: [
+            config_1.ConfigModule.forRoot({
+                isGlobal: true,
+                envFilePath: ['.env', 'server-nest/.env']
+            }),
+            mailer_1.MailerModule.forRootAsync({
+                imports: [config_1.ConfigModule],
+                useFactory: async (config) => {
+                    const smtpHost = config.get('SMTP_HOST');
+                    if (!smtpHost) {
+                        console.warn('[MailerModule] SMTP_HOST not set. Emails will be logged to console.');
+                        return {
+                            transport: {
+                                jsonTransport: true,
+                            },
+                            defaults: {
+                                from: '"Uniflow" <noreply@uniflow.com>',
+                            },
+                            template: {
+                                dir: process.cwd() + '/templates/',
+                                adapter: new handlebars_adapter_1.HandlebarsAdapter(),
+                                options: {
+                                    strict: true,
+                                },
+                            },
+                        };
+                    }
+                    return {
+                        transport: {
+                            host: smtpHost,
+                            port: config.get('SMTP_PORT'),
+                            secure: false,
+                            auth: {
+                                user: config.get('SMTP_USER'),
+                                pass: config.get('SMTP_PASS'),
+                            },
+                        },
+                        defaults: {
+                            from: `"Uniflow" <${config.get('SMTP_USER')}>`,
+                        },
+                        template: {
+                            dir: process.cwd() + '/templates/',
+                            adapter: new handlebars_adapter_1.HandlebarsAdapter(),
+                            options: {
+                                strict: true,
+                            },
+                        },
+                    };
+                },
+                inject: [config_1.ConfigService],
+            }),
+            database_module_1.DatabaseModule,
+            students_module_1.StudentsModule,
+            auth_module_1.AuthModule,
+            modules_module_1.ModulesModule,
+        ],
     })
-], StudentsModule);
+], AppModule);
 
 
-/***/ }),
-/* 15 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ },
+
+/***/ "./src/auth/auth.controller.ts"
+/*!*************************************!*\
+  !*** ./src/auth/auth.controller.ts ***!
+  \*************************************/
+(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AuthController = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const auth_service_1 = __webpack_require__(/*! ./auth.service */ "./src/auth/auth.service.ts");
+let AuthController = class AuthController {
+    authService;
+    constructor(authService) {
+        this.authService = authService;
+    }
+    async login(body, res) {
+        const { email, password } = body;
+        const user = await this.authService.validateUser(email, password);
+        if (!user) {
+            throw new common_1.UnauthorizedException('Invalid credentials');
+        }
+        res.setHeader('Cache-Control', 'no-cache');
+        return res.json(user);
+    }
+    async forgotPassword(body) {
+        return this.authService.forgotPassword(body.email);
+    }
+    async resetPassword(body) {
+        return this.authService.resetPassword(body.token, body.newPass);
+    }
+};
+exports.AuthController = AuthController;
+__decorate([
+    (0, common_1.Post)('login'),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "login", null);
+__decorate([
+    (0, common_1.Post)('forgot-password'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "forgotPassword", null);
+__decorate([
+    (0, common_1.Post)('reset-password'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "resetPassword", null);
+exports.AuthController = AuthController = __decorate([
+    (0, common_1.Controller)('api'),
+    __metadata("design:paramtypes", [typeof (_a = typeof auth_service_1.AuthService !== "undefined" && auth_service_1.AuthService) === "function" ? _a : Object])
+], AuthController);
+
+
+/***/ },
+
+/***/ "./src/auth/auth.module.ts"
+/*!*********************************!*\
+  !*** ./src/auth/auth.module.ts ***!
+  \*********************************/
+(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AuthModule = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const auth_service_1 = __webpack_require__(/*! ./auth.service */ "./src/auth/auth.service.ts");
+const auth_controller_1 = __webpack_require__(/*! ./auth.controller */ "./src/auth/auth.controller.ts");
+let AuthModule = class AuthModule {
+};
+exports.AuthModule = AuthModule;
+exports.AuthModule = AuthModule = __decorate([
+    (0, common_1.Module)({
+        controllers: [auth_controller_1.AuthController],
+        providers: [auth_service_1.AuthService],
+    })
+], AuthModule);
+
+
+/***/ },
+
+/***/ "./src/auth/auth.service.ts"
+/*!**********************************!*\
+  !*** ./src/auth/auth.service.ts ***!
+  \**********************************/
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
@@ -413,86 +354,349 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+var _a, _b;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AuthService = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const database_provider_1 = __webpack_require__(/*! ../database/database.provider */ "./src/database/database.provider.ts");
+const mysql2_1 = __webpack_require__(/*! drizzle-orm/mysql2 */ "drizzle-orm/mysql2");
+const schema = __importStar(__webpack_require__(/*! @shared/schema */ "../shared/schema.ts"));
+const drizzle_orm_1 = __webpack_require__(/*! drizzle-orm */ "drizzle-orm");
+const bcrypt_1 = __importDefault(__webpack_require__(/*! bcrypt */ "bcrypt"));
+const mailer_1 = __webpack_require__(/*! @nestjs-modules/mailer */ "@nestjs-modules/mailer");
+const crypto = __importStar(__webpack_require__(/*! crypto */ "crypto"));
+let AuthService = class AuthService {
+    db;
+    mailerService;
+    constructor(db, mailerService) {
+        this.db = db;
+        this.mailerService = mailerService;
+    }
+    async validateUser(email, pass) {
+        console.log(`[BACKEND DEBUG] validateUser called for: ${email}`);
+        const user = await this.db.query.users.findFirst({
+            where: (0, drizzle_orm_1.eq)(schema.users.email, email),
+        });
+        if (!user) {
+            console.log(`[BACKEND DEBUG] User NOT found: ${email}`);
+            return null;
+        }
+        const isMatch = await bcrypt_1.default.compare(pass, user.password);
+        console.log(`[BACKEND DEBUG] Password match for ${email}: ${isMatch}`);
+        if (isMatch) {
+            const { password, ...result } = user;
+            return result;
+        }
+        return null;
+    }
+    async forgotPassword(email) {
+        const user = await this.db.query.users.findFirst({
+            where: (0, drizzle_orm_1.eq)(schema.users.email, email),
+        });
+        if (!user) {
+            throw new common_1.NotFoundException('User not found');
+        }
+        const token = crypto.randomBytes(32).toString('hex');
+        const expires = Date.now() + 900000;
+        await this.db.update(schema.users)
+            .set({
+            resetPasswordToken: token,
+            resetPasswordExpires: expires.toString()
+        })
+            .where((0, drizzle_orm_1.eq)(schema.users.id, user.id));
+        const resetLink = `http://localhost:5173/reset-password?token=${token}`;
+        console.log('\n=================================================================');
+        console.log('[PASSWORD RESET DEBUG] Starting password reset flow for:', email);
+        console.log('[PASSWORD RESET DEBUG] Token generated:', token);
+        console.log('[PASSWORD RESET DEBUG] FULL RESET LINK BELOW:');
+        console.log(resetLink);
+        console.log('=================================================================\n');
+        try {
+            console.log('[PASSWORD RESET DEBUG] Attempting to send email via MailerService...');
+            await this.mailerService.sendMail({
+                to: user.email,
+                subject: 'Réinitialisation de mot de passe - Uniflow',
+                template: 'reset-password',
+                context: {
+                    resetLink: resetLink,
+                },
+                attachments: [
+                    {
+                        filename: 'uniflow.png',
+                        path: process.cwd() + '/templates/uniflow.png',
+                        cid: 'uniflow_logo'
+                    }
+                ]
+            });
+            console.log('[PASSWORD RESET DEBUG] Email sent successfully (or logged if mock transport).');
+        }
+        catch (e) {
+            console.error('[BACKEND ERROR] Failed to send email via MailerService:', e);
+            console.error('[BACKEND ERROR] Stack:', e instanceof Error ? e.stack : String(e));
+        }
+        const isDevMode = !process.env.SMTP_HOST;
+        return {
+            message: 'Password reset email sent',
+            ...(isDevMode ? { devToken: token, devLink: resetLink } : {})
+        };
+    }
+    async resetPassword(token, newPass) {
+        const user = await this.db.query.users.findFirst({
+            where: (0, drizzle_orm_1.eq)(schema.users.resetPasswordToken, token),
+        });
+        if (!user) {
+            throw new common_1.BadRequestException('Invalid token');
+        }
+        const now = Date.now();
+        const expires = parseInt(user.resetPasswordExpires || '0');
+        if (now > expires) {
+            throw new common_1.BadRequestException('Token expired');
+        }
+        const hashedPassword = await bcrypt_1.default.hash(newPass, 10);
+        await this.db.update(schema.users)
+            .set({
+            password: hashedPassword,
+            resetPasswordToken: null,
+            resetPasswordExpires: null,
+        })
+            .where((0, drizzle_orm_1.eq)(schema.users.id, user.id));
+        return { message: 'Password successfully updated' };
+    }
+};
+exports.AuthService = AuthService;
+exports.AuthService = AuthService = __decorate([
+    (0, common_1.Injectable)(),
+    __param(0, (0, common_1.Inject)(database_provider_1.DRIZZLE)),
+    __metadata("design:paramtypes", [typeof (_a = typeof mysql2_1.MySql2Database !== "undefined" && mysql2_1.MySql2Database) === "function" ? _a : Object, typeof (_b = typeof mailer_1.MailerService !== "undefined" && mailer_1.MailerService) === "function" ? _b : Object])
+], AuthService);
+
+
+/***/ },
+
+/***/ "./src/database/database.module.ts"
+/*!*****************************************!*\
+  !*** ./src/database/database.module.ts ***!
+  \*****************************************/
+(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DatabaseModule = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const database_provider_1 = __webpack_require__(/*! ./database.provider */ "./src/database/database.provider.ts");
+let DatabaseModule = class DatabaseModule {
+};
+exports.DatabaseModule = DatabaseModule;
+exports.DatabaseModule = DatabaseModule = __decorate([
+    (0, common_1.Global)(),
+    (0, common_1.Module)({
+        providers: [database_provider_1.DrizzleProvider],
+        exports: [database_provider_1.DRIZZLE],
+    })
+], DatabaseModule);
+
+
+/***/ },
+
+/***/ "./src/database/database.provider.ts"
+/*!*******************************************!*\
+  !*** ./src/database/database.provider.ts ***!
+  \*******************************************/
+(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DrizzleProvider = exports.DRIZZLE = void 0;
+const config_1 = __webpack_require__(/*! @nestjs/config */ "@nestjs/config");
+const mysql2_1 = __webpack_require__(/*! drizzle-orm/mysql2 */ "drizzle-orm/mysql2");
+const mysql = __importStar(__webpack_require__(/*! mysql2/promise */ "mysql2/promise"));
+const schema = __importStar(__webpack_require__(/*! @shared/schema */ "../shared/schema.ts"));
+exports.DRIZZLE = 'DRIZZLE';
+exports.DrizzleProvider = {
+    provide: exports.DRIZZLE,
+    useFactory: async (configService) => {
+        const databaseUrl = configService.get('DATABASE_URL');
+        if (!databaseUrl) {
+            throw new Error('DATABASE_URL is not defined in the environment. Please check your .env file.');
+        }
+        const pool = await mysql.createPool({
+            uri: databaseUrl,
+        });
+        return (0, mysql2_1.drizzle)(pool, { schema, mode: 'default' });
+    },
+    inject: [config_1.ConfigService],
+};
+
+
+/***/ },
+
+/***/ "./src/modules/modules.controller.ts"
+/*!*******************************************!*\
+  !*** ./src/modules/modules.controller.ts ***!
+  \*******************************************/
+(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.StudentsService = void 0;
-const common_1 = __webpack_require__(3);
-const database_provider_1 = __webpack_require__(8);
-const mysql2_1 = __webpack_require__(9);
-const schema = __importStar(__webpack_require__(11));
-const drizzle_orm_1 = __webpack_require__(16);
-let StudentsService = class StudentsService {
+exports.ModulesController = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const modules_service_1 = __webpack_require__(/*! ./modules.service */ "./src/modules/modules.service.ts");
+let ModulesController = class ModulesController {
+    modulesService;
+    constructor(modulesService) {
+        this.modulesService = modulesService;
+    }
+    async findAll() {
+        return await this.modulesService.findAll();
+    }
+};
+exports.ModulesController = ModulesController;
+__decorate([
+    (0, common_1.Get)('modules'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], ModulesController.prototype, "findAll", null);
+exports.ModulesController = ModulesController = __decorate([
+    (0, common_1.Controller)('api'),
+    __metadata("design:paramtypes", [typeof (_a = typeof modules_service_1.ModulesService !== "undefined" && modules_service_1.ModulesService) === "function" ? _a : Object])
+], ModulesController);
+
+
+/***/ },
+
+/***/ "./src/modules/modules.module.ts"
+/*!***************************************!*\
+  !*** ./src/modules/modules.module.ts ***!
+  \***************************************/
+(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ModulesModule = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const modules_service_1 = __webpack_require__(/*! ./modules.service */ "./src/modules/modules.service.ts");
+const modules_controller_1 = __webpack_require__(/*! ./modules.controller */ "./src/modules/modules.controller.ts");
+let ModulesModule = class ModulesModule {
+};
+exports.ModulesModule = ModulesModule;
+exports.ModulesModule = ModulesModule = __decorate([
+    (0, common_1.Module)({
+        controllers: [modules_controller_1.ModulesController],
+        providers: [modules_service_1.ModulesService],
+    })
+], ModulesModule);
+
+
+/***/ },
+
+/***/ "./src/modules/modules.service.ts"
+/*!****************************************!*\
+  !*** ./src/modules/modules.service.ts ***!
+  \****************************************/
+(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ModulesService = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const database_provider_1 = __webpack_require__(/*! ../database/database.provider */ "./src/database/database.provider.ts");
+const mysql2_1 = __webpack_require__(/*! drizzle-orm/mysql2 */ "drizzle-orm/mysql2");
+let ModulesService = class ModulesService {
     db;
     constructor(db) {
         this.db = db;
     }
-    async getProfileByUserId(userId) {
-        return await this.db.query.students.findFirst({
-            where: (0, drizzle_orm_1.eq)(schema.students.userId, userId),
-        });
-    }
-    async getGrades(studentId) {
-        return await this.db.query.grades.findMany({
-            where: (0, drizzle_orm_1.eq)(schema.grades.studentId, studentId),
-        });
-    }
-    async getSchedule(studentId) {
-        return await this.db.query.schedule.findMany({
-            where: (0, drizzle_orm_1.eq)(schema.schedule.studentId, studentId),
-        });
-    }
-    async getPayments(studentId) {
-        return await this.db.query.payments.findMany({
-            where: (0, drizzle_orm_1.eq)(schema.payments.studentId, studentId),
-        });
-    }
-    async getAbsences(studentId) {
-        return await this.db.query.absences.findMany({
-            where: (0, drizzle_orm_1.eq)(schema.absences.studentId, studentId),
-        });
-    }
-    async getClaims(studentId) {
-        return await this.db.query.claims.findMany({
-            where: (0, drizzle_orm_1.eq)(schema.claims.studentId, studentId),
-        });
-    }
-    async createClaim(studentId, claimData) {
-        await this.db.insert(schema.claims).values({
-            studentId,
-            subject: claimData.subject,
-            message: claimData.message,
-            date: new Date().toISOString().split('T')[0],
-            status: 'En cours',
-            response: null,
-        });
-        return { message: 'Claim created successfully' };
-    }
-    async updateProfile(studentId, updates) {
-        await this.db.update(schema.students)
-            .set(updates)
-            .where((0, drizzle_orm_1.eq)(schema.students.id, studentId));
-        return await this.db.query.students.findFirst({
-            where: (0, drizzle_orm_1.eq)(schema.students.id, studentId),
-        });
+    async findAll() {
+        return await this.db.query.modules.findMany();
     }
 };
-exports.StudentsService = StudentsService;
-exports.StudentsService = StudentsService = __decorate([
+exports.ModulesService = ModulesService;
+exports.ModulesService = ModulesService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, common_1.Inject)(database_provider_1.DRIZZLE)),
     __metadata("design:paramtypes", [typeof (_a = typeof mysql2_1.MySql2Database !== "undefined" && mysql2_1.MySql2Database) === "function" ? _a : Object])
-], StudentsService);
+], ModulesService);
 
 
-/***/ }),
-/* 16 */
-/***/ ((module) => {
+/***/ },
 
-module.exports = require("drizzle-orm");
-
-/***/ }),
-/* 17 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ "./src/students/students.controller.ts"
+/*!*********************************************!*\
+  !*** ./src/students/students.controller.ts ***!
+  \*********************************************/
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -510,8 +714,8 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.StudentsController = void 0;
-const common_1 = __webpack_require__(3);
-const students_service_1 = __webpack_require__(15);
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const students_service_1 = __webpack_require__(/*! ./students.service */ "./src/students/students.service.ts");
 let StudentsController = class StudentsController {
     studentsService;
     constructor(studentsService) {
@@ -613,9 +817,13 @@ exports.StudentsController = StudentsController = __decorate([
 ], StudentsController);
 
 
-/***/ }),
-/* 18 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ },
+
+/***/ "./src/students/students.module.ts"
+/*!*****************************************!*\
+  !*** ./src/students/students.module.ts ***!
+  \*****************************************/
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -625,24 +833,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.AuthModule = void 0;
-const common_1 = __webpack_require__(3);
-const auth_service_1 = __webpack_require__(19);
-const auth_controller_1 = __webpack_require__(21);
-let AuthModule = class AuthModule {
+exports.StudentsModule = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const students_service_1 = __webpack_require__(/*! ./students.service */ "./src/students/students.service.ts");
+const students_controller_1 = __webpack_require__(/*! ./students.controller */ "./src/students/students.controller.ts");
+let StudentsModule = class StudentsModule {
 };
-exports.AuthModule = AuthModule;
-exports.AuthModule = AuthModule = __decorate([
+exports.StudentsModule = StudentsModule;
+exports.StudentsModule = StudentsModule = __decorate([
     (0, common_1.Module)({
-        controllers: [auth_controller_1.AuthController],
-        providers: [auth_service_1.AuthService],
+        controllers: [students_controller_1.StudentsController],
+        providers: [students_service_1.StudentsService],
     })
-], AuthModule);
+], StudentsModule);
 
 
-/***/ }),
-/* 19 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ },
+
+/***/ "./src/students/students.service.ts"
+/*!******************************************!*\
+  !*** ./src/students/students.service.ts ***!
+  \******************************************/
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
@@ -690,217 +902,200 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.AuthService = void 0;
-const common_1 = __webpack_require__(3);
-const database_provider_1 = __webpack_require__(8);
-const mysql2_1 = __webpack_require__(9);
-const schema = __importStar(__webpack_require__(11));
-const drizzle_orm_1 = __webpack_require__(16);
-const bcrypt_1 = __importDefault(__webpack_require__(20));
-let AuthService = class AuthService {
+exports.StudentsService = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const database_provider_1 = __webpack_require__(/*! ../database/database.provider */ "./src/database/database.provider.ts");
+const mysql2_1 = __webpack_require__(/*! drizzle-orm/mysql2 */ "drizzle-orm/mysql2");
+const schema = __importStar(__webpack_require__(/*! @shared/schema */ "../shared/schema.ts"));
+const drizzle_orm_1 = __webpack_require__(/*! drizzle-orm */ "drizzle-orm");
+let StudentsService = class StudentsService {
     db;
     constructor(db) {
         this.db = db;
     }
-    async validateUser(email, pass) {
-        console.log(`[BACKEND DEBUG] validateUser called for: ${email}`);
-        const user = await this.db.query.users.findFirst({
-            where: (0, drizzle_orm_1.eq)(schema.users.email, email),
+    async getProfileByUserId(userId) {
+        return await this.db.query.students.findFirst({
+            where: (0, drizzle_orm_1.eq)(schema.students.userId, userId),
         });
-        if (!user) {
-            console.log(`[BACKEND DEBUG] User NOT found: ${email}`);
-            return null;
-        }
-        const isMatch = await bcrypt_1.default.compare(pass, user.password);
-        console.log(`[BACKEND DEBUG] Password match for ${email}: ${isMatch}`);
-        if (isMatch) {
-            const { password, ...result } = user;
-            return result;
-        }
-        return null;
+    }
+    async getGrades(studentId) {
+        return await this.db.query.grades.findMany({
+            where: (0, drizzle_orm_1.eq)(schema.grades.studentId, studentId),
+        });
+    }
+    async getSchedule(studentId) {
+        return await this.db.query.schedule.findMany({
+            where: (0, drizzle_orm_1.eq)(schema.schedule.studentId, studentId),
+        });
+    }
+    async getPayments(studentId) {
+        return await this.db.query.payments.findMany({
+            where: (0, drizzle_orm_1.eq)(schema.payments.studentId, studentId),
+        });
+    }
+    async getAbsences(studentId) {
+        return await this.db.query.absences.findMany({
+            where: (0, drizzle_orm_1.eq)(schema.absences.studentId, studentId),
+        });
+    }
+    async getClaims(studentId) {
+        return await this.db.query.claims.findMany({
+            where: (0, drizzle_orm_1.eq)(schema.claims.studentId, studentId),
+        });
+    }
+    async createClaim(studentId, claimData) {
+        await this.db.insert(schema.claims).values({
+            studentId,
+            subject: claimData.subject,
+            message: claimData.message,
+            date: new Date().toISOString().split('T')[0],
+            status: 'En cours',
+            response: null,
+        });
+        return { message: 'Claim created successfully' };
+    }
+    async updateProfile(studentId, updates) {
+        await this.db.update(schema.students)
+            .set(updates)
+            .where((0, drizzle_orm_1.eq)(schema.students.id, studentId));
+        return await this.db.query.students.findFirst({
+            where: (0, drizzle_orm_1.eq)(schema.students.id, studentId),
+        });
     }
 };
-exports.AuthService = AuthService;
-exports.AuthService = AuthService = __decorate([
+exports.StudentsService = StudentsService;
+exports.StudentsService = StudentsService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, common_1.Inject)(database_provider_1.DRIZZLE)),
     __metadata("design:paramtypes", [typeof (_a = typeof mysql2_1.MySql2Database !== "undefined" && mysql2_1.MySql2Database) === "function" ? _a : Object])
-], AuthService);
+], StudentsService);
 
 
-/***/ }),
-/* 20 */
-/***/ ((module) => {
+/***/ },
+
+/***/ "@nestjs-modules/mailer"
+/*!*****************************************!*\
+  !*** external "@nestjs-modules/mailer" ***!
+  \*****************************************/
+(module) {
+
+module.exports = require("@nestjs-modules/mailer");
+
+/***/ },
+
+/***/ "@nestjs-modules/mailer/dist/adapters/handlebars.adapter"
+/*!**************************************************************************!*\
+  !*** external "@nestjs-modules/mailer/dist/adapters/handlebars.adapter" ***!
+  \**************************************************************************/
+(module) {
+
+module.exports = require("@nestjs-modules/mailer/dist/adapters/handlebars.adapter");
+
+/***/ },
+
+/***/ "@nestjs/common"
+/*!*********************************!*\
+  !*** external "@nestjs/common" ***!
+  \*********************************/
+(module) {
+
+module.exports = require("@nestjs/common");
+
+/***/ },
+
+/***/ "@nestjs/config"
+/*!*********************************!*\
+  !*** external "@nestjs/config" ***!
+  \*********************************/
+(module) {
+
+module.exports = require("@nestjs/config");
+
+/***/ },
+
+/***/ "@nestjs/core"
+/*!*******************************!*\
+  !*** external "@nestjs/core" ***!
+  \*******************************/
+(module) {
+
+module.exports = require("@nestjs/core");
+
+/***/ },
+
+/***/ "bcrypt"
+/*!*************************!*\
+  !*** external "bcrypt" ***!
+  \*************************/
+(module) {
 
 module.exports = require("bcrypt");
 
-/***/ }),
-/* 21 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ },
 
+/***/ "crypto"
+/*!*************************!*\
+  !*** external "crypto" ***!
+  \*************************/
+(module) {
 
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-var _a;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.AuthController = void 0;
-const common_1 = __webpack_require__(3);
-const auth_service_1 = __webpack_require__(19);
-let AuthController = class AuthController {
-    authService;
-    constructor(authService) {
-        this.authService = authService;
-    }
-    async login(body, res) {
-        const { email, password } = body;
-        const user = await this.authService.validateUser(email, password);
-        if (!user) {
-            throw new common_1.UnauthorizedException('Invalid credentials');
-        }
-        res.setHeader('Cache-Control', 'no-cache');
-        return res.json(user);
-    }
-};
-exports.AuthController = AuthController;
-__decorate([
-    (0, common_1.Post)('login'),
-    __param(0, (0, common_1.Body)()),
-    __param(1, (0, common_1.Res)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
-    __metadata("design:returntype", Promise)
-], AuthController.prototype, "login", null);
-exports.AuthController = AuthController = __decorate([
-    (0, common_1.Controller)('api'),
-    __metadata("design:paramtypes", [typeof (_a = typeof auth_service_1.AuthService !== "undefined" && auth_service_1.AuthService) === "function" ? _a : Object])
-], AuthController);
+module.exports = require("crypto");
 
+/***/ },
 
-/***/ }),
-/* 22 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ "drizzle-orm"
+/*!******************************!*\
+  !*** external "drizzle-orm" ***!
+  \******************************/
+(module) {
 
+module.exports = require("drizzle-orm");
 
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ModulesModule = void 0;
-const common_1 = __webpack_require__(3);
-const modules_service_1 = __webpack_require__(23);
-const modules_controller_1 = __webpack_require__(24);
-let ModulesModule = class ModulesModule {
-};
-exports.ModulesModule = ModulesModule;
-exports.ModulesModule = ModulesModule = __decorate([
-    (0, common_1.Module)({
-        controllers: [modules_controller_1.ModulesController],
-        providers: [modules_service_1.ModulesService],
-    })
-], ModulesModule);
+/***/ },
 
+/***/ "drizzle-orm/mysql-core"
+/*!*****************************************!*\
+  !*** external "drizzle-orm/mysql-core" ***!
+  \*****************************************/
+(module) {
 
-/***/ }),
-/* 23 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+module.exports = require("drizzle-orm/mysql-core");
 
+/***/ },
 
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-var _a;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ModulesService = void 0;
-const common_1 = __webpack_require__(3);
-const database_provider_1 = __webpack_require__(8);
-const mysql2_1 = __webpack_require__(9);
-let ModulesService = class ModulesService {
-    db;
-    constructor(db) {
-        this.db = db;
-    }
-    async findAll() {
-        return await this.db.query.modules.findMany();
-    }
-};
-exports.ModulesService = ModulesService;
-exports.ModulesService = ModulesService = __decorate([
-    (0, common_1.Injectable)(),
-    __param(0, (0, common_1.Inject)(database_provider_1.DRIZZLE)),
-    __metadata("design:paramtypes", [typeof (_a = typeof mysql2_1.MySql2Database !== "undefined" && mysql2_1.MySql2Database) === "function" ? _a : Object])
-], ModulesService);
+/***/ "drizzle-orm/mysql2"
+/*!*************************************!*\
+  !*** external "drizzle-orm/mysql2" ***!
+  \*************************************/
+(module) {
 
+module.exports = require("drizzle-orm/mysql2");
 
-/***/ }),
-/* 24 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ },
 
+/***/ "drizzle-zod"
+/*!******************************!*\
+  !*** external "drizzle-zod" ***!
+  \******************************/
+(module) {
 
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var _a;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ModulesController = void 0;
-const common_1 = __webpack_require__(3);
-const modules_service_1 = __webpack_require__(23);
-let ModulesController = class ModulesController {
-    modulesService;
-    constructor(modulesService) {
-        this.modulesService = modulesService;
-    }
-    async findAll() {
-        return await this.modulesService.findAll();
-    }
-};
-exports.ModulesController = ModulesController;
-__decorate([
-    (0, common_1.Get)('modules'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], ModulesController.prototype, "findAll", null);
-exports.ModulesController = ModulesController = __decorate([
-    (0, common_1.Controller)('api'),
-    __metadata("design:paramtypes", [typeof (_a = typeof modules_service_1.ModulesService !== "undefined" && modules_service_1.ModulesService) === "function" ? _a : Object])
-], ModulesController);
+module.exports = require("drizzle-zod");
 
+/***/ },
 
-/***/ })
-/******/ 	]);
+/***/ "mysql2/promise"
+/*!*********************************!*\
+  !*** external "mysql2/promise" ***!
+  \*********************************/
+(module) {
+
+module.exports = require("mysql2/promise");
+
+/***/ }
+
+/******/ 	});
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
@@ -911,6 +1106,12 @@ exports.ModulesController = ModulesController = __decorate([
 /******/ 		var cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
 /******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Check if module exists (development only)
+/******/ 		if (__webpack_modules__[moduleId] === undefined) {
+/******/ 			var e = new Error("Cannot find module '" + moduleId + "'");
+/******/ 			e.code = 'MODULE_NOT_FOUND';
+/******/ 			throw e;
 /******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = __webpack_module_cache__[moduleId] = {
@@ -931,10 +1132,13 @@ var __webpack_exports__ = {};
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
 (() => {
 var exports = __webpack_exports__;
+/*!*********************!*\
+  !*** ./src/main.ts ***!
+  \*********************/
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const core_1 = __webpack_require__(1);
-const app_module_1 = __webpack_require__(2);
+const core_1 = __webpack_require__(/*! @nestjs/core */ "@nestjs/core");
+const app_module_1 = __webpack_require__(/*! ./app.module */ "./src/app.module.ts");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     await app.listen(process.env.PORT ?? 3001);
