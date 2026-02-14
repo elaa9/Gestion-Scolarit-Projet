@@ -40,4 +40,9 @@ export class TeachersController {
         if (!teacher) throw new NotFoundException('Teacher profile not found');
         return teacher;
     }
+
+    @Get('teacher-dashboard/:id')
+    async getDashboardStats(@Param('id') id: string) {
+        return await this.teachersService.getDashboardStats(id);
+    }
 }

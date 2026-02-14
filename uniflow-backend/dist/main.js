@@ -144,6 +144,232 @@ exports.insertClassSchema = (0, drizzle_zod_1.createInsertSchema)(exports.classe
 
 /***/ },
 
+/***/ "./src/absences/absences.controller.ts"
+/*!*********************************************!*\
+  !*** ./src/absences/absences.controller.ts ***!
+  \*********************************************/
+(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AbsencesController = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const absences_service_1 = __webpack_require__(/*! ./absences.service */ "./src/absences/absences.service.ts");
+let AbsencesController = class AbsencesController {
+    absencesService;
+    constructor(absencesService) {
+        this.absencesService = absencesService;
+    }
+    getStudentAbsences(studentId) {
+        return this.absencesService.getByStudent(studentId);
+    }
+    getClassStudents(classId) {
+        return this.absencesService.getStudentsByClass(classId);
+    }
+    getSessionAbsences(moduleId, date, startTime) {
+        return this.absencesService.getAbsencesForSession(moduleId, date, startTime);
+    }
+    recordAbsences(data) {
+        return this.absencesService.recordAbsences(data);
+    }
+};
+exports.AbsencesController = AbsencesController;
+__decorate([
+    (0, common_1.Get)('student/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], AbsencesController.prototype, "getStudentAbsences", null);
+__decorate([
+    (0, common_1.Get)('class/:classId/students'),
+    __param(0, (0, common_1.Param)('classId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], AbsencesController.prototype, "getClassStudents", null);
+__decorate([
+    (0, common_1.Get)('session'),
+    __param(0, (0, common_1.Query)('moduleId')),
+    __param(1, (0, common_1.Query)('date')),
+    __param(2, (0, common_1.Query)('startTime')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String, String]),
+    __metadata("design:returntype", void 0)
+], AbsencesController.prototype, "getSessionAbsences", null);
+__decorate([
+    (0, common_1.Post)('record'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], AbsencesController.prototype, "recordAbsences", null);
+exports.AbsencesController = AbsencesController = __decorate([
+    (0, common_1.Controller)('api/absences'),
+    __metadata("design:paramtypes", [typeof (_a = typeof absences_service_1.AbsencesService !== "undefined" && absences_service_1.AbsencesService) === "function" ? _a : Object])
+], AbsencesController);
+
+
+/***/ },
+
+/***/ "./src/absences/absences.module.ts"
+/*!*****************************************!*\
+  !*** ./src/absences/absences.module.ts ***!
+  \*****************************************/
+(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AbsencesModule = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const database_module_1 = __webpack_require__(/*! ../database/database.module */ "./src/database/database.module.ts");
+const absences_controller_1 = __webpack_require__(/*! ./absences.controller */ "./src/absences/absences.controller.ts");
+const absences_service_1 = __webpack_require__(/*! ./absences.service */ "./src/absences/absences.service.ts");
+let AbsencesModule = class AbsencesModule {
+};
+exports.AbsencesModule = AbsencesModule;
+exports.AbsencesModule = AbsencesModule = __decorate([
+    (0, common_1.Module)({
+        imports: [database_module_1.DatabaseModule],
+        controllers: [absences_controller_1.AbsencesController],
+        providers: [absences_service_1.AbsencesService],
+        exports: [absences_service_1.AbsencesService],
+    })
+], AbsencesModule);
+
+
+/***/ },
+
+/***/ "./src/absences/absences.service.ts"
+/*!******************************************!*\
+  !*** ./src/absences/absences.service.ts ***!
+  \******************************************/
+(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AbsencesService = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const database_provider_1 = __webpack_require__(/*! ../database/database.provider */ "./src/database/database.provider.ts");
+const mysql2_1 = __webpack_require__(/*! drizzle-orm/mysql2 */ "drizzle-orm/mysql2");
+const schema = __importStar(__webpack_require__(/*! @shared/schema */ "../shared/schema.ts"));
+const drizzle_orm_1 = __webpack_require__(/*! drizzle-orm */ "drizzle-orm");
+const uuid_1 = __webpack_require__(/*! uuid */ "uuid");
+let AbsencesService = class AbsencesService {
+    db;
+    constructor(db) {
+        this.db = db;
+    }
+    async getByStudent(studentId) {
+        return await this.db.query.absences.findMany({
+            where: (0, drizzle_orm_1.eq)(schema.absences.studentId, studentId),
+            orderBy: (absences, { desc }) => [desc(absences.date)]
+        });
+    }
+    async getStudentsByClass(classId) {
+        return await this.db.query.students.findMany({
+            where: (0, drizzle_orm_1.eq)(schema.students.classId, classId)
+        });
+    }
+    async recordAbsences(data) {
+        const { absentStudentIds, moduleId, date, startTime, endTime } = data;
+        await this.db.delete(schema.absences)
+            .where((0, drizzle_orm_1.and)((0, drizzle_orm_1.eq)(schema.absences.moduleId, moduleId), (0, drizzle_orm_1.eq)(schema.absences.date, date), (0, drizzle_orm_1.eq)(schema.absences.startTime, startTime), (0, drizzle_orm_1.eq)(schema.absences.endTime, endTime)));
+        if (absentStudentIds.length === 0)
+            return { count: 0 };
+        const records = absentStudentIds.map(studentId => ({
+            id: (0, uuid_1.v4)(),
+            studentId,
+            moduleId,
+            date,
+            startTime,
+            endTime,
+            justified: 'false'
+        }));
+        await this.db.insert(schema.absences).values(records);
+        return { count: records.length };
+    }
+    async getAbsencesForSession(moduleId, date, startTime) {
+        return await this.db.query.absences.findMany({
+            where: (0, drizzle_orm_1.and)((0, drizzle_orm_1.eq)(schema.absences.moduleId, moduleId), (0, drizzle_orm_1.eq)(schema.absences.date, date), (0, drizzle_orm_1.eq)(schema.absences.startTime, startTime))
+        });
+    }
+};
+exports.AbsencesService = AbsencesService;
+exports.AbsencesService = AbsencesService = __decorate([
+    (0, common_1.Injectable)(),
+    __param(0, (0, common_1.Inject)(database_provider_1.DRIZZLE)),
+    __metadata("design:paramtypes", [typeof (_a = typeof mysql2_1.MySql2Database !== "undefined" && mysql2_1.MySql2Database) === "function" ? _a : Object])
+], AbsencesService);
+
+
+/***/ },
+
 /***/ "./src/app.module.ts"
 /*!***************************!*\
   !*** ./src/app.module.ts ***!
@@ -173,6 +399,8 @@ const schedules_module_1 = __webpack_require__(/*! ./schedules/schedules.module 
 const classes_module_1 = __webpack_require__(/*! ./classes/classes.module */ "./src/classes/classes.module.ts");
 const claims_module_1 = __webpack_require__(/*! ./claims/claims.module */ "./src/claims/claims.module.ts");
 const payments_module_1 = __webpack_require__(/*! ./payments/payments.module */ "./src/payments/payments.module.ts");
+const absences_module_1 = __webpack_require__(/*! ./absences/absences.module */ "./src/absences/absences.module.ts");
+const grades_module_1 = __webpack_require__(/*! ./grades/grades.module */ "./src/grades/grades.module.ts");
 const stats_module_1 = __webpack_require__(/*! ./stats.module */ "./src/stats.module.ts");
 let AppModule = class AppModule {
 };
@@ -241,6 +469,8 @@ exports.AppModule = AppModule = __decorate([
             claims_module_1.ClaimsModule,
             payments_module_1.PaymentsModule,
             stats_module_1.StatsModule,
+            absences_module_1.AbsencesModule,
+            grades_module_1.GradesModule,
         ],
     })
 ], AppModule);
@@ -1475,6 +1705,216 @@ exports.DepartmentsService = DepartmentsService = __decorate([
     __param(0, (0, common_1.Inject)(database_provider_1.DRIZZLE)),
     __metadata("design:paramtypes", [typeof (_a = typeof mysql2_1.MySql2Database !== "undefined" && mysql2_1.MySql2Database) === "function" ? _a : Object])
 ], DepartmentsService);
+
+
+/***/ },
+
+/***/ "./src/grades/grades.controller.ts"
+/*!*****************************************!*\
+  !*** ./src/grades/grades.controller.ts ***!
+  \*****************************************/
+(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.GradesController = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const grades_service_1 = __webpack_require__(/*! ./grades.service */ "./src/grades/grades.service.ts");
+let GradesController = class GradesController {
+    gradesService;
+    constructor(gradesService) {
+        this.gradesService = gradesService;
+    }
+    async getStudentsWithGrades(classId, moduleId) {
+        return this.gradesService.getStudentsWithGrades(classId, moduleId);
+    }
+    async saveGrade(data) {
+        return this.gradesService.saveGrade(data);
+    }
+};
+exports.GradesController = GradesController;
+__decorate([
+    (0, common_1.Get)('class-module'),
+    __param(0, (0, common_1.Query)('classId')),
+    __param(1, (0, common_1.Query)('moduleId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", Promise)
+], GradesController.prototype, "getStudentsWithGrades", null);
+__decorate([
+    (0, common_1.Post)('save'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], GradesController.prototype, "saveGrade", null);
+exports.GradesController = GradesController = __decorate([
+    (0, common_1.Controller)('api/grades'),
+    __metadata("design:paramtypes", [typeof (_a = typeof grades_service_1.GradesService !== "undefined" && grades_service_1.GradesService) === "function" ? _a : Object])
+], GradesController);
+
+
+/***/ },
+
+/***/ "./src/grades/grades.module.ts"
+/*!*************************************!*\
+  !*** ./src/grades/grades.module.ts ***!
+  \*************************************/
+(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.GradesModule = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const database_module_1 = __webpack_require__(/*! ../database/database.module */ "./src/database/database.module.ts");
+const grades_controller_1 = __webpack_require__(/*! ./grades.controller */ "./src/grades/grades.controller.ts");
+const grades_service_1 = __webpack_require__(/*! ./grades.service */ "./src/grades/grades.service.ts");
+let GradesModule = class GradesModule {
+};
+exports.GradesModule = GradesModule;
+exports.GradesModule = GradesModule = __decorate([
+    (0, common_1.Module)({
+        imports: [database_module_1.DatabaseModule],
+        controllers: [grades_controller_1.GradesController],
+        providers: [grades_service_1.GradesService],
+        exports: [grades_service_1.GradesService],
+    })
+], GradesModule);
+
+
+/***/ },
+
+/***/ "./src/grades/grades.service.ts"
+/*!**************************************!*\
+  !*** ./src/grades/grades.service.ts ***!
+  \**************************************/
+(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.GradesService = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const database_provider_1 = __webpack_require__(/*! ../database/database.provider */ "./src/database/database.provider.ts");
+const mysql2_1 = __webpack_require__(/*! drizzle-orm/mysql2 */ "drizzle-orm/mysql2");
+const schema = __importStar(__webpack_require__(/*! @shared/schema */ "../shared/schema.ts"));
+const drizzle_orm_1 = __webpack_require__(/*! drizzle-orm */ "drizzle-orm");
+const uuid_1 = __webpack_require__(/*! uuid */ "uuid");
+let GradesService = class GradesService {
+    db;
+    constructor(db) {
+        this.db = db;
+    }
+    async getStudentsWithGrades(classId, moduleId) {
+        const students = await this.db.query.students.findMany({
+            where: (0, drizzle_orm_1.eq)(schema.students.classId, classId)
+        });
+        const grades = await this.db.query.grades.findMany({
+            where: (0, drizzle_orm_1.eq)(schema.grades.moduleId, moduleId)
+        });
+        return students.map((student) => {
+            const studentGrade = grades.find((g) => g.studentId === student.id);
+            return {
+                ...student,
+                grade: studentGrade || null
+            };
+        });
+    }
+    async saveGrade(data) {
+        const { studentId, moduleId, grade, maxGrade, status } = data;
+        const existing = await this.db.query.grades.findFirst({
+            where: (0, drizzle_orm_1.and)((0, drizzle_orm_1.eq)(schema.grades.studentId, studentId), (0, drizzle_orm_1.eq)(schema.grades.moduleId, moduleId))
+        });
+        if (existing) {
+            await this.db.update(schema.grades)
+                .set({ grade, maxGrade, status })
+                .where((0, drizzle_orm_1.eq)(schema.grades.id, existing.id));
+            return { id: existing.id, ...data };
+        }
+        else {
+            const id = (0, uuid_1.v4)();
+            await this.db.insert(schema.grades).values({
+                id,
+                studentId,
+                moduleId,
+                grade,
+                maxGrade,
+                status
+            });
+            return { id, ...data };
+        }
+    }
+};
+exports.GradesService = GradesService;
+exports.GradesService = GradesService = __decorate([
+    (0, common_1.Injectable)(),
+    __param(0, (0, common_1.Inject)(database_provider_1.DRIZZLE)),
+    __metadata("design:paramtypes", [typeof (_a = typeof mysql2_1.MySql2Database !== "undefined" && mysql2_1.MySql2Database) === "function" ? _a : Object])
+], GradesService);
 
 
 /***/ },
@@ -3203,6 +3643,9 @@ let TeachersController = class TeachersController {
             throw new common_1.NotFoundException('Teacher profile not found');
         return teacher;
     }
+    async getDashboardStats(id) {
+        return await this.teachersService.getDashboardStats(id);
+    }
 };
 exports.TeachersController = TeachersController;
 __decorate([
@@ -3247,6 +3690,13 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], TeachersController.prototype, "getProfile", null);
+__decorate([
+    (0, common_1.Get)('teacher-dashboard/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], TeachersController.prototype, "getDashboardStats", null);
 exports.TeachersController = TeachersController = __decorate([
     (0, common_1.Controller)('api'),
     __metadata("design:paramtypes", [typeof (_a = typeof teachers_service_1.TeachersService !== "undefined" && teachers_service_1.TeachersService) === "function" ? _a : Object])
@@ -3351,6 +3801,8 @@ const schema = __importStar(__webpack_require__(/*! @shared/schema */ "../shared
 const drizzle_orm_1 = __webpack_require__(/*! drizzle-orm */ "drizzle-orm");
 const uuid_1 = __webpack_require__(/*! uuid */ "uuid");
 const bcrypt = __importStar(__webpack_require__(/*! bcrypt */ "bcrypt"));
+const date_fns_1 = __webpack_require__(/*! date-fns */ "date-fns");
+const locale_1 = __webpack_require__(/*! date-fns/locale */ "date-fns/locale");
 let TeachersService = class TeachersService {
     db;
     constructor(db) {
@@ -3412,6 +3864,79 @@ let TeachersService = class TeachersService {
         await this.db.delete(schema.teachers).where((0, drizzle_orm_1.eq)(schema.teachers.id, id));
         await this.db.delete(schema.users).where((0, drizzle_orm_1.eq)(schema.users.id, teacher.userId));
         return { message: 'Teacher and associated user deleted successfully' };
+    }
+    async getDashboardStats(teacherId) {
+        const schedules = await this.db.query.schedules.findMany({
+            where: (0, drizzle_orm_1.eq)(schema.schedules.teacherId, teacherId)
+        });
+        const classIds = [...new Set(schedules.map((s) => s.classId))];
+        const moduleIds = [...new Set(schedules.map((s) => s.moduleId))];
+        let studentsCount = 0;
+        if (classIds.length > 0) {
+            const students = await this.db.query.students.findMany({
+                where: (0, drizzle_orm_1.inArray)(schema.students.classId, classIds)
+            });
+            studentsCount = students.length;
+        }
+        let successRate = 'N/A';
+        if (moduleIds.length > 0) {
+            const grades = await this.db.query.grades.findMany({
+                where: (0, drizzle_orm_1.inArray)(schema.grades.moduleId, moduleIds)
+            });
+            if (grades.length > 0) {
+                const passed = grades.filter((g) => parseFloat(g.grade) >= 10).length;
+                successRate = `${Math.round((passed / grades.length) * 100)}%`;
+            }
+        }
+        let pendingAbsences = 0;
+        if (moduleIds.length > 0) {
+            const absences = await this.db.query.absences.findMany({
+                where: (0, drizzle_orm_1.and)((0, drizzle_orm_1.inArray)(schema.absences.moduleId, moduleIds), (0, drizzle_orm_1.eq)(schema.absences.justified, 'false'))
+            });
+            pendingAbsences = absences.length;
+        }
+        const todayFr = (0, date_fns_1.format)(new Date(), 'EEEE', { locale: locale_1.fr });
+        const capitalizedToday = todayFr.charAt(0).toUpperCase() + todayFr.slice(1);
+        const sessionsForToday = schedules.filter((s) => s.dayOfWeek === capitalizedToday);
+        const enrichedToday = await Promise.all(sessionsForToday.map(async (s) => {
+            const mod = await this.db.query.modules.findFirst({ where: (0, drizzle_orm_1.eq)(schema.modules.id, s.moduleId) });
+            const cl = await this.db.query.classes.findFirst({ where: (0, drizzle_orm_1.eq)(schema.classes.id, s.classId) });
+            return {
+                time: `${s.startTime} - ${s.endTime}`,
+                subject: mod?.name || 'Inconnu',
+                room: s.room || 'N/A',
+                type: s.type,
+                className: cl?.name || 'Inconnue'
+            };
+        }));
+        let recentAbsList = [];
+        if (moduleIds.length > 0) {
+            const rawRecent = await this.db.query.absences.findMany({
+                where: (0, drizzle_orm_1.inArray)(schema.absences.moduleId, moduleIds),
+                limit: 5,
+                orderBy: [(0, drizzle_orm_1.desc)(schema.absences.date)]
+            });
+            recentAbsList = await Promise.all(rawRecent.map(async (a) => {
+                const st = await this.db.query.students.findFirst({ where: (0, drizzle_orm_1.eq)(schema.students.id, a.studentId) });
+                const mod = await this.db.query.modules.findFirst({ where: (0, drizzle_orm_1.eq)(schema.modules.id, a.moduleId) });
+                return {
+                    student: st?.name || 'Inconnu',
+                    course: mod?.name || 'Inconnu',
+                    date: a.date,
+                    status: a.justified === 'true' ? 'Justifiée' : 'Non justifiée'
+                };
+            }));
+        }
+        return {
+            stats: [
+                { label: 'Étudiants encadrés', value: studentsCount.toString(), color: 'text-emerald-600', bg: 'bg-emerald-50' },
+                { label: 'Modules actifs', value: moduleIds.length.toString(), color: 'text-blue-600', bg: 'bg-blue-50' },
+                { label: 'Taux de réussite', value: successRate, color: 'text-purple-600', bg: 'bg-purple-50' },
+                { label: 'Absences à traiter', value: pendingAbsences.toString(), color: 'text-orange-600', bg: 'bg-orange-50' }
+            ],
+            todaySchedule: enrichedToday,
+            recentAbsences: recentAbsList
+        };
     }
 };
 exports.TeachersService = TeachersService;
@@ -3491,6 +4016,26 @@ module.exports = require("bcrypt");
 (module) {
 
 module.exports = require("crypto");
+
+/***/ },
+
+/***/ "date-fns"
+/*!***************************!*\
+  !*** external "date-fns" ***!
+  \***************************/
+(module) {
+
+module.exports = require("date-fns");
+
+/***/ },
+
+/***/ "date-fns/locale"
+/*!**********************************!*\
+  !*** external "date-fns/locale" ***!
+  \**********************************/
+(module) {
+
+module.exports = require("date-fns/locale");
 
 /***/ },
 

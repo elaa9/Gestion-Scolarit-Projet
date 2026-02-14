@@ -13,6 +13,8 @@ import { SchedulesModule } from './schedules/schedules.module';
 import { ClassesModule } from './classes/classes.module';
 import { ClaimsModule } from './claims/claims.module';
 import { PaymentsModule } from './payments/payments.module';
+import { AbsencesModule } from './absences/absences.module';
+import { GradesModule } from './grades/grades.module';
 import { StatsModule } from './stats.module';
 
 @Module({
@@ -80,6 +82,8 @@ import { StatsModule } from './stats.module';
     ClaimsModule,
     PaymentsModule,
     StatsModule,
+    AbsencesModule,
+    GradesModule,
   ],
 })
 export class AppModule { }
