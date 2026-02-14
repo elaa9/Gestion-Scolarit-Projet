@@ -145,6 +145,14 @@ async function bootstrap() {
             console.error('Failed to add service column to claims:', e);
         }
 
+
+        try {
+            await db.execute(sql`ALTER TABLE students ADD COLUMN IF NOT EXISTS payment_plan VARCHAR(50)`);
+            console.log('Added payment_plan column to students.');
+        } catch (e) {
+            console.error('Failed to add payment_plan column to students:', e);
+        }
+
         console.log('Migration complete: Classes and updated students/teachers tables are ready.');
 
     } catch (error: any) {

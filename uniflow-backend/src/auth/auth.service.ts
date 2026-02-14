@@ -30,7 +30,23 @@ export class AuthService {
 
         if (isMatch) {
             const { password, ...result } = user;
-            return result;
+            let name = "Utilisateur";
+
+            if (user.role === 'etudiant') {
+                const student = await (this.db.query as any).students.findFirst({
+                    where: eq(schema.students.userId as any, user.id),
+                });
+                if (student) name = student.name;
+            } else if (user.role === 'enseignant') {
+                const teacher = await (this.db.query as any).teachers.findFirst({
+                    where: eq(schema.teachers.userId as any, user.id),
+                });
+                if (teacher) name = teacher.name;
+            } else if (user.role === 'admin') {
+                name = "Administrateur";
+            }
+
+            return { ...result, name };
         }
         return null;
     }

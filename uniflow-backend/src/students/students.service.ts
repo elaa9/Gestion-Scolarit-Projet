@@ -243,4 +243,32 @@ export class StudentsService {
             .where(eq(schema.claims.id as any, id));
         return { message: 'Claim deleted successfully' };
     }
+
+    // --- SCHEDULE ---
+    async addSchedule(studentId: string, data: any) {
+        const student = await (this.db.query as any).students.findFirst({
+            where: eq(schema.students.id as any, studentId),
+        });
+        if (!student || !student.classId) return { message: 'Student or class not found' };
+
+        const id = uuidv4();
+        await (this.db.insert(schema.schedules as any) as any).values({
+            id,
+            classId: student.classId,
+            moduleId: data.moduleId,
+            teacherId: data.teacherId || null,
+            dayOfWeek: data.dayOfWeek,
+            startTime: data.startTime,
+            endTime: data.endTime,
+            room: data.room,
+            type: data.type || 'Cours',
+        });
+        return { message: 'Schedule added successfully', id };
+    }
+
+    async deleteSchedule(id: string) {
+        await this.db.delete(schema.schedules as any)
+            .where(eq(schema.schedules.id as any, id));
+        return { message: 'Schedule deleted successfully' };
+    }
 }

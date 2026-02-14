@@ -81,6 +81,16 @@ export class StudentsController {
         return await this.studentsService.getSchedule(id);
     }
 
+    @Post('admin/students/:id/schedule')
+    async addSchedule(@Param('id') id: string, @Body() body: any) {
+        return await this.studentsService.addSchedule(id, body);
+    }
+
+    @Delete('admin/schedule/:id')
+    async deleteSchedule(@Param('id') id: string) {
+        return await this.studentsService.deleteSchedule(id);
+    }
+
     @Get('admin/students/:id/payments')
     async getAdminPayments(@Param('id') id: string) {
         return await this.studentsService.getPayments(id);
@@ -118,8 +128,6 @@ export class StudentsController {
         if (!grade) throw new NotFoundException('Grade not found');
         return grade;
     }
-
-    // --- SCHEDULE (MOVED TO SCHEDULES CONTROLLER) ---
 
     // --- PAYMENTS CRUD ---
     @Post('admin/students/:id/payments')

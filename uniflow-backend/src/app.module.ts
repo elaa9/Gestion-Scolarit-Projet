@@ -12,6 +12,8 @@ import { DepartmentsModule } from './departments/departments.module';
 import { SchedulesModule } from './schedules/schedules.module';
 import { ClassesModule } from './classes/classes.module';
 import { ClaimsModule } from './claims/claims.module';
+import { PaymentsModule } from './payments/payments.module';
+import { StatsModule } from './stats.module';
 
 @Module({
   imports: [
@@ -76,6 +78,8 @@ import { ClaimsModule } from './claims/claims.module';
     SchedulesModule,
     ClassesModule,
     ClaimsModule,
+    PaymentsModule,
+    StatsModule,
   ],
 })
 export class AppModule { }
