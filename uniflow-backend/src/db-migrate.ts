@@ -137,6 +137,14 @@ async function bootstrap() {
         } catch (e) { }
 
         await db.execute(sql`ALTER TABLE teachers ADD COLUMN IF NOT EXISTS assigned_classes TEXT`);
+
+        try {
+            await db.execute(sql`ALTER TABLE claims ADD COLUMN IF NOT EXISTS service VARCHAR(255) DEFAULT 'Autre'`);
+            console.log('Added service column to claims.');
+        } catch (e) {
+            console.error('Failed to add service column to claims:', e);
+        }
+
         console.log('Migration complete: Classes and updated students/teachers tables are ready.');
 
     } catch (error: any) {
