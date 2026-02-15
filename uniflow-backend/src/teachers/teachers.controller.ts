@@ -5,6 +5,11 @@ import { TeachersService } from './teachers.service';
 export class TeachersController {
     constructor(private readonly teachersService: TeachersService) { }
 
+    @Get('teachers')
+    async listTeachers() {
+        return await this.teachersService.getAllTeachers();
+    }
+
     @Get('admin/teachers')
     async getAllTeachers() {
         return await this.teachersService.getAllTeachers();

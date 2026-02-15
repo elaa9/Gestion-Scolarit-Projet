@@ -3616,6 +3616,9 @@ let TeachersController = class TeachersController {
     constructor(teachersService) {
         this.teachersService = teachersService;
     }
+    async listTeachers() {
+        return await this.teachersService.getAllTeachers();
+    }
     async getAllTeachers() {
         return await this.teachersService.getAllTeachers();
     }
@@ -3648,6 +3651,12 @@ let TeachersController = class TeachersController {
     }
 };
 exports.TeachersController = TeachersController;
+__decorate([
+    (0, common_1.Get)('teachers'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], TeachersController.prototype, "listTeachers", null);
 __decorate([
     (0, common_1.Get)('admin/teachers'),
     __metadata("design:type", Function),
