@@ -5,11 +5,13 @@ import * as schema from '@shared/schema';
 import { eq, and } from 'drizzle-orm';
 import { v4 as uuidv4 } from 'uuid';
 import * as bcrypt from 'bcrypt';
+import { MailerService } from '@nestjs-modules/mailer';
 
 @Injectable()
 export class StudentsService {
     constructor(
         @Inject(DRIZZLE) private db: MySql2Database<typeof schema>,
+        private readonly mailerService: MailerService,
     ) { }
 
     async getProfileByUserId(userId: string) {
@@ -85,10 +87,19 @@ export class StudentsService {
     }
 
     async deleteStudent(id: string) {
-        // Optional: delete related records first if no cascade
+        // Find student to get userId
+        const student = await this.getStudentById(id);
+        if (!student) return { message: 'Student not found' };
+
+        // Delete student record
         await this.db.delete(schema.students as any)
             .where(eq(schema.students.id as any, id));
-        return { message: 'Student deleted successfully' };
+
+        // Delete associated user record
+        await this.db.delete(schema.users as any)
+            .where(eq(schema.users.id as any, student.userId));
+
+        return { message: 'Student and associated user deleted successfully' };
     }
 
     async createStudent(data: any) {
@@ -128,6 +139,32 @@ export class StudentsService {
             address: address || null,
             enrollmentDate: new Date().toISOString().split('T')[0],
         });
+
+        // Send confirmation email
+        try {
+            await this.mailerService.sendMail({
+                to: email,
+                subject: 'Bienvenue chez Uniflow - Votre compte étudiant',
+                template: 'account-confirmation',
+                context: {
+                    name: name,
+                    email: email,
+                    password: password,
+                    role: 'Étudiant',
+                    loginLink: 'http://localhost:5173',
+                },
+                attachments: [
+                    {
+                        filename: 'uniflow.png',
+                        path: process.cwd() + '/templates/uniflow.png',
+                        cid: 'uniflow_logo'
+                    }
+                ]
+            });
+            console.log(`[StudentsService] Confirmation email sent to ${email}`);
+        } catch (error) {
+            console.error(`[StudentsService] Failed to send confirmation email to ${email}:`, error);
+        }
 
         return { message: 'Student created successfully', studentId, userId };
     }

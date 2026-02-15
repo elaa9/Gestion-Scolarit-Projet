@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenue chez Uniflow</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f6f9fc;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2563eb, #10b981);
+            padding: 40px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .logo {
+            background-color: white;
+            border-radius: 16px;
+            margin: 0 auto 16px;
+            padding: 12px;
+            display: inline-block;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .content {
+            padding: 40px 30px;
+            text-align: left;
+            color: #334155;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .text {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            color: #475569;
+        }
+
+        .credentials-box {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+
+        .credential-item {
+            margin-bottom: 12px;
+        }
+
+        .credential-label {
+            font-weight: 600;
+            color: #64748b;
+            display: block;
+            font-size: 14px;
+        }
+
+        .credential-value {
+            font-family: monospace;
+            font-size: 18px;
+            color: #2563eb;
+            font-weight: 700;
+        }
+
+        .btn-wrapper {
+            text-align: center;
+            margin: 32px 0;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #2563eb, #10b981);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            display: inline-block;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+            transition: all 0.2s;
+        }
+
+        .footer {
+            padding: 24px;
+            background-color: #f8fafc;
+            text-align: center;
+            font-size: 12px;
+            color: #94a3b8;
+            border-top: 1px solid #e2e8f0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <img src="cid:uniflow_logo" alt="Uniflow" style="height: 64px; width: auto; display: block;">
+            </div>
+            <h1 style="margin: 0; font-size: 28px; font-weight: 800;">Uniflow</h1>
+        </div>
+        <div class="content">
+            <h2 class="title">Bienvenue, {{name}} !</h2>
+            <p class="text">Bonjour,</p>
+            <p class="text">Votre compte Uniflow en tant que <strong>{{role}}</strong> a été créé avec succès par l'administrateur. Voici vos informations de connexion :</p>
+            
+            <div class="credentials-box">
+                <div class="credential-item">
+                    <span class="credential-label">Email</span>
+                    <span class="credential-value">{{email}}</span>
+                </div>
+                <div class="credential-item">
+                    <span class="credential-label">Mot de passe provisoire</span>
+                    <span class="credential-value">{{password}}</span>
+                </div>
+            </div>
+
+            <div class="btn-wrapper">
+                <a href="{{loginLink}}" class="btn">Se connecter à Uniflow</a>
+            </div>
+
+            <p class="text" style="font-size: 14px; color: #64748b; margin-top: 24px;">
+                Par mesure de sécurité, nous vous recommandons de changer votre mot de passe dès votre première connexion.
+            </p>
+        </div>
+        <div class="footer">
+            <p>&copy; 2026 Uniflow. Tous droits réservés.</p>
+            <p>Cet email a été envoyé automatiquement pour confirmer la création de votre compte.</p>
+        </div>
+    </div>
+</body>
+
+</html>

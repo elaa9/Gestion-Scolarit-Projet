@@ -5,6 +5,7 @@ import * as schema from '@shared/schema';
 import { eq, and, sql, desc, inArray } from 'drizzle-orm';
 import { v4 as uuidv4 } from 'uuid';
 import * as bcrypt from 'bcrypt';
+import { MailerService } from '@nestjs-modules/mailer';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 
@@ -12,6 +13,7 @@ import { fr } from 'date-fns/locale';
 export class TeachersService {
     constructor(
         @Inject(DRIZZLE) private db: MySql2Database<typeof schema>,
+        private readonly mailerService: MailerService,
     ) { }
 
     async getAllTeachers() {
@@ -63,6 +65,32 @@ export class TeachersService {
             phone: phone || null,
             status: 'Actif',
         });
+
+        // Send confirmation email
+        try {
+            await this.mailerService.sendMail({
+                to: email,
+                subject: 'Bienvenue chez Uniflow - Votre compte enseignant',
+                template: 'account-confirmation',
+                context: {
+                    name: name,
+                    email: email,
+                    password: password,
+                    role: 'Enseignant',
+                    loginLink: 'http://localhost:5173',
+                },
+                attachments: [
+                    {
+                        filename: 'uniflow.png',
+                        path: process.cwd() + '/templates/uniflow.png',
+                        cid: 'uniflow_logo'
+                    }
+                ]
+            });
+            console.log(`[TeachersService] Confirmation email sent to ${email}`);
+        } catch (error) {
+            console.error(`[TeachersService] Failed to send confirmation email to ${email}:`, error);
+        }
 
         return { message: 'Teacher created successfully', teacherId, userId };
     }

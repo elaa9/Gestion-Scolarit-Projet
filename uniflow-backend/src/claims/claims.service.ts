@@ -51,7 +51,6 @@ export class ClaimsService {
                             <p><strong>Subject:</strong> ${data.subject}</p>
                             <p><strong>Message:</strong></p>
                             <p>${data.message}</p>
-                            <a href="http://localhost:5173/admin/reclamations">View in Dashboard</a>
                         `
                     });
                 }
